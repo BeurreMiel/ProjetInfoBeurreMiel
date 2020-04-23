@@ -1,3 +1,3 @@
 # ProjetInfoBeurreMiel
 
-SOULI est accro au café 
+SOULI (et Mailine apparemment) est accro au café 
