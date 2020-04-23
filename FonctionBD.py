@@ -314,5 +314,137 @@ def ajout_suggestion():
         json.dump(sugges, write_file)
 
 
+### Fonction représentation graphique ###
 
+def representationgraphique(critere):
     
+    #Erreurs
+    if critere<2 or critere>10 :
+        return('Critère inexistant')
+        
+    tranche1=[]
+    tranche2=[]
+    tranche3=[]
+    tranche4=[]
+    tranche5=[]
+    crit=[]
+    pays=[]
+
+    #Séparation des tranches d'âges
+    for j in range (len(data)):
+        if data[j].get('People and Society'):
+            if data[j]['People and Society'].get('Age structure'):
+                tranche1.append(data[j]['People and Society']['Age structure']['0-14 years']['text'])
+                tranche2.append(data[j]['People and Society']['Age structure']['15-24 years']['text'])
+                tranche3.append(data[j]['People and Society']['Age structure']['25-54 years']['text'])
+                tranche4.append(data[j]['People and Society']['Age structure']['55-64 years']['text'])
+                tranche5.append(data[j]['People and Society']['Age structure']['65 years and over']['text'])
+   
+    #On garde les pourcentages
+    TR1=[]
+    for z in range(len(tranche1)):
+        TR1.append(float(tranche1[z][:tranche1[z].find('%')]))
+                         
+    TR2=[]
+    for z in range(len(tranche2)):
+        TR2.append(float(tranche2[z][:tranche2[z].find('%')]))
+    
+    TR3=[]
+    for z in range(len(tranche3)):
+        TR3.append(float(tranche3[z][:tranche3[z].find('%')]))    
+    
+    TR4=[]
+    for z in range(len(tranche4)):
+        TR4.append(float(tranche4[z][:tranche4[z].find('%')]))    
+   
+    TR5=[]
+    for z in range(len(tranche5)):
+        TR5.append(float(tranche5[z][:tranche5[z].find('%')]))
+        
+        
+        
+    #Pour réaliser le diagramme en barres d’un certain critère  
+    for i in range (len(data)):
+        if critere==2:
+            if data[i].get('Geography') and data[i].get('Government'):
+                if data[i]['Geography'].get('Area') and data[i]['Government'].get('Country name'):
+                    if data[i]['Geography']['Area'].get('total') and data[i]['Government']['Country name'].get('conventional short form'):
+                        
+                        crit.append(data[i]['Geography']['Area']['total']['text'])
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+        
+        elif critere==3:
+             if data[i].get('People and Society') and data[i].get('Government'):
+                if data[i]['People and Society'].get('Population') and data[i]['Government'].get('Country name'):
+                    if data[i]['Government']['Country name'].get('conventional short form'):
+                        
+                            crit.append(data[i]['People and Society']['Population']['text'])
+                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])        
+        
+        elif critere==4:
+             if data[i].get('People and Society') and data[i].get('Government'):
+                if data[i]['People and Society'].get('Population growth rate') and data[i]['Government'].get('Country name'):
+                    if data[i]['Government']['Country name'].get('conventional short form'):
+                        
+                        crit.append(data[i]['People and Society']['Population growth rate']['text'])
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+        
+        elif critere==5:
+             if data[i].get('Economy') and data[i].get('Government'):
+                if data[i]['Economy'].get('Inflation rate (consumer prices)') and data[i]['Government'].get('Country name'):
+                    if data[i]['Government']['Country name'].get('conventional short form'):
+                        
+                        crit.append(data[i]['Economy']['Inflation rate (consumer prices)']['text'])
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+        
+        elif critere==6:
+             if data[i].get('Economy') and data[i].get('Government'):
+                if data[i]['Economy'].get('Debt - external') and data[i]['Government'].get('Country name'):
+                    if data[i]['Government']['Country name'].get('conventional short form'):
+            
+                        crit.append(data[i]['Economy']['Debt - external']['text'])
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+        
+        elif critere==7:
+             if data[i].get('Economy') and data[i].get('Government'):
+                if data[i]['Economy'].get('Unemployment rate') and data[i]['Government'].get('Country name'):
+                    if data[i]['Government']['Country name'].get('conventional short form'):
+            
+                        crit.append(data[i]['Economy']['Unemployment rate']['text'])
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+        
+        elif critere==8:
+             if data[i].get('People and Society') and data[i].get('Government'):
+                if data[i]['People and Society'].get('Health expenditures') and data[i]['Government'].get('Country name'):
+                    if data[i]['Government']['Country name'].get('conventional short form'):
+            
+                        crit.append(data[i]['People and Society']['Health expenditures']['text'])
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+        
+        elif critere==9:
+             if data[i].get('People and Society') and data[i].get('Government'):
+                if data[i]['People and Society'].get('Education expenditures') and data[i]['Government'].get('Country name'):
+                    if data[i]['Government']['Country name'].get('conventional short form'):
+            
+                        crit.append(data[i]['People and Society']['Education expenditures']['text'])
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+        
+        elif critere==10:
+             if data[i].get('Military and Security') and data[i].get('Government'):
+                if data[i]['Military and Security'].get('Military expenditures') and data[i]['Government'].get('Country name'):
+                    if data[i]['Government']['Country name'].get('conventional short form'):
+            
+                        crit.append(data[i]['Military and Security']['Military expenditures']['text']) 
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+        
+
+           
+
+    #Diagramme en barre du critère
+    plt.bar(pays,crit)
+    plt.show()
+    
+    #Boxplot des tranches d'âges
+    plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+    plt.show()
+        
