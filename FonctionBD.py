@@ -206,3 +206,113 @@ def ajout_suggestion():
     sugges.append(liste_info)
     with open("Suggestions.json", "w") as write_file:
         json.dump(sugges, write_file)
+
+# Fonction teste d'un nombre ou d'une chaîne de caractère
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
+# Fonction affichage d'un pays sous forme de tableau
+
+import numpy
+
+def affichage(nom_ou_code_pays):
+
+    if is_number(nom_ou_code_pays) is False :
+
+        code = ''
+
+        for code_pays in range(len(data)) :
+
+            if data[code_pays].get('Government') :
+                if data[code_pays]['Government'].get('Country name') :
+                    if data[code_pays]['Government']['Country name'].get('conventional long form') :
+                        if data[code_pays]['Government']['Country name']['conventional long form']['text'] == nom_ou_code_pays :
+                            code = code_pays
+                    if data[code_pays]['Government']['Country name'].get('conventional short form') :
+                        if data[code_pays]['Government']['Country name']['conventional short form']['text'] == nom_ou_code_pays :
+                            code = code_pays
+                    if data[code_pays]['Government']['Country name'].get('local long form') :
+                        if data[code_pays]['Government']['Country name']['local long form']['text'] == nom_ou_code_pays :
+                            code = code_pays
+                    if data[code_pays]['Government']['Country name'].get('local short form') :
+                        if data[code_pays]['Government']['Country name']['local short form']['text'] == nom_ou_code_pays :
+                            code = code_pays
+
+        if code == '' :
+            raise NameError('Pays introuvable')
+        else :
+            nom_ou_code_pays = code
+
+
+    inf1 = data[nom_ou_code_pays]['Government']['Country name']['conventional short form']['text']
+    inf2 = data[nom_ou_code_pays]['Geography']['Area']['total']['text']
+    inf3 = data[nom_ou_code_pays]['People and Society']['Population']['text']
+    inf4 = data[nom_ou_code_pays]['People and Society']['Population growth rate']['text']
+    inf5 = data[nom_ou_code_pays]['Economy']['Inflation rate (consumer prices)']['text']
+    inf6 = data[nom_ou_code_pays]['Economy']['Debt - external']['text']
+    inf7 = data[nom_ou_code_pays]['Economy']['Unemployment rate']['text']
+    inf8 = data[nom_ou_code_pays]['People and Society']['Health expenditures']['text']
+    inf9 = data[nom_ou_code_pays]['People and Society']['Education expenditures']['text']
+    inf10 = data[nom_ou_code_pays]['Military and Security']['Military expenditures']['text']
+    inf11 = data[nom_ou_code_pays]['People and Society']['Age structure']
+
+    return numpy.array([['Nom du pays', inf1],
+                        ['Superficie', inf2],
+                        ['Population', inf3],
+                        ['Croissance démographique', inf4],
+                        ['Inflation', inf5],
+                        ['Dette', inf6],
+                        ['Taux de chômage', inf7],
+                        ['Taux de dépenses en santé', inf8],
+                        ['Taux de dépenses en éducation', inf9],
+                        ['Taux de dépenses militaires', inf10],
+                        ['Classe des 0-14 ans', inf11['0-14 years']['text']],
+                        ['Classe des 15-24 ans', inf11['15-24 years']['text']],
+                        ['Classe des 25-54 ans', inf11['25-54 years']['text']],
+                        ['Classe des 55-64 ans', inf11['55-64 years']['text']],
+                        ['Classe des 65 ans et plus', inf11['65 years and over']['text']]])
+
+
+# Fonction suppression d'un pays
+
+def suppression(nom_ou_code_pays):
+
+    if is_number(nom_ou_code_pays) is True :
+        if nom_ou_code_pays > len(data) :
+            raise NameError('Pays introuvable')
+
+    if is_number(nom_ou_code_pays) is False :
+
+        code = ''
+
+        for code_pays in range(len(data)) :
+
+            if data[code_pays].get('Government') :
+                if data[code_pays]['Government'].get('Country name') :
+                    if data[code_pays]['Government']['Country name'].get('conventional long form') :
+                        if data[code_pays]['Government']['Country name']['conventional long form']['text'] == nom_ou_code_pays :
+                            code = code_pays
+                    if data[code_pays]['Government']['Country name'].get('conventional short form') :
+                        if data[code_pays]['Government']['Country name']['conventional short form']['text'] == nom_ou_code_pays :
+                            code = code_pays
+                    if data[code_pays]['Government']['Country name'].get('local long form') :
+                        if data[code_pays]['Government']['Country name']['local long form']['text'] == nom_ou_code_pays :
+                            code = code_pays
+                    if data[code_pays]['Government']['Country name'].get('local short form') :
+                        if data[code_pays]['Government']['Country name']['local short form']['text'] == nom_ou_code_pays :
+                            code = code_pays
+
+        if code == '' :
+            raise NameError('Pays introuvable')
+        else :
+            nom_ou_code_pays = code
+
+    del data[nom_ou_code_pays]
+
+    return data
