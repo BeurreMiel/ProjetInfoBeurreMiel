@@ -244,7 +244,10 @@ def ajout_compte(users):
     # On suppose que le compte qui a accès à cette fonction est administrateur
     new = {}
     new['ID'] = {}
-    type_user = input("Entrez le type d'utilisateur que vous souhaitez creer : ")
+    while True : 
+        type_user = input("Entrez le type d'utilisateur que vous souhaitez creer : (G/D) ")
+        if type_user in ["G","g","D","D"] : #teste si c'est bien le bon type 
+            break
     id_user = input("Entrez l'ID utilisateur que vous souhaitez creer : ")
     new['ID']['username'] = id_user
     mdp_user = input("Entrez le mot de passe utilisateur que vous souhaitez creer : ")
