@@ -41,7 +41,7 @@ def pays_vide():
     print ("Creation de pays vide terminee")
 
     return(entree)
-# Fonction teste d'un nombre ou d'une chaîne de caractère
+# Fonction test d'un nombre ou d'une chaîne de caractère
 
 def is_number(s):
     try:
@@ -50,6 +50,40 @@ def is_number(s):
     except ValueError:
         return False
 
+# Fonction de récupération de code pays 
+def get_code(nom_pays): 
+    code = ''
+    for code_pays in range(len(data)) :
+        code = ''
+        # On verifie la presence des noms à chaque etape
+
+        if data[code_pays].get('Government') : 
+            if data[code_pays]['Government'].get('Country name') :
+                if data[code_pays]['Government']['Country name'].get('conventional long form') :
+                    if data[code_pays]['Government']['Country name']['conventional long form']['text'] == nom_pays :
+                        code = code_pays
+                        
+                        break
+                if data[code_pays]['Government']['Country name'].get('conventional short form') :
+                    if data[code_pays]['Government']['Country name']['conventional short form']['text'] == nom_pays :
+                        code = code_pays
+                        
+                        break
+                if data[code_pays]['Government']['Country name'].get('local long form') :
+                    if data[code_pays]['Government']['Country name']['local long form']['text'] == nom_pays :
+                        code = code_pays
+                        
+                        break
+                if data[code_pays]['Government']['Country name'].get('local short form') :
+                    if data[code_pays]['Government']['Country name']['local short form']['text'] == nom_pays :
+                        code = code_pays
+                        
+                        break
+
+    if code == '' :
+        raise NameError('Pays introuvable')
+    else :
+        return(code)
 # Fonction affichage d'un pays sous forme de tableau
 
 def affichage(nom_ou_code_pays):
@@ -313,6 +347,75 @@ def ajout_suggestion():
     with open("Suggestions.json", "w") as write_file:
         json.dump(sugges, write_file)
 
+def gestion_suggestion(): 
+    n = len(sugges)
+    while n > 0 :
+        print("#####################################################")
+        print("Voici la suggestion : ") 
+        print("Nom du pays : ", sugges[0][0])
+        print("Superficie du pays : ", sugges[0][1])
+        print("Population du pays : ", sugges[0][2])
+        print("Croissance démographique du pays : ", sugges[0][3])
+        print("Inflation du pays : ", sugges[0][4])
+        print("Dette du pays : ", sugges[0][5])
+        print("Taux de chômage du pays : ", sugges[0][6])
+        print("Depense sante du pays : ", sugges[0][7])
+        print("Depense education du pays : ", sugges[0][8])
+        print("Depense militaire du pays : ", sugges[0][9])
+        print("Taux age1 : ", sugges[0][10])
+        print("Taux age2 : ", sugges[0][11])
+        print("Taux age3 : ", sugges[0][12])
+        print("Taux age4 : ", sugges[0][13])
+        print("Taux age5 : ", sugges[0][14])
+        print("#####################################################")
+        while True : 
+            res = input("Vous pouvez accepter (A) ou rejeter (R) cette suggestion : ")
+            if res in ["A","a","R","r"]: 
+                break 
+        
+        if res in ["A","a"] : # Si l'admin accepte la suggestion 
+            liste_info= sugges[0]
+            nom_pays = liste_info.pop(0) # Recupere le nom du pays pour le placer correctement
+            print ("Le pays ",nom_pays, "va être modifié :")
+            nom_pays = get_code(nom_pays)
+            # Test de présence du pays
+            if len(liste_info) >0 : 
+                if liste_info[0] not in ['None','none']: 
+                    data[nom_pays]['Geography']['Area']['total']['text'] = liste_info[0]
+                if liste_info[1] not in ['None','none']: 
+                    data[nom_pays]['People and Society']['Population']['text'] = liste_info[1]
+                if liste_info[2] not in ['None','none']: 
+                    data[nom_pays]['People and Society']['Population growth rate']['text'] = liste_info[2]
+                if liste_info[3] not in ['None','none']: 
+                    data[nom_pays]['Economy']['Inflation rate (consumer prices)']['text'] = liste_info[3]
+                if liste_info[4] not in ['None','none']: 
+                    data[nom_pays]['Economy']['Debt - external']['text'] = liste_info[4]
+                if liste_info[5] not in ['None','none']: 
+                    data[nom_pays]['Economy']['Unemployment rate']['text'] = liste_info[5]
+                if liste_info[6] not in ['None','none']: 
+                    data[nom_pays]['People and Society']['Health expenditures']['text'] = liste_info[6]
+                if liste_info[7] not in ['None','none']: 
+                    data[nom_pays]['People and Society']['Education expenditures']['text'] = liste_info[7]
+                if liste_info[8] not in ['None','none']: 
+                    data[nom_pays]['Military and Security']['Military expenditures']['text'] = liste_info[8]
+                if liste_info[9] not in ['None','none']: 
+                    data[nom_pays]['People and Society']['Age structure']['0-14 years']['text'] = liste_info[9]
+                if liste_info[10] not in ['None','none']: 
+                    data[nom_pays]['People and Society']['Age structure']['15-24 years']['text'] = liste_info[10]
+                if liste_info[11] not in ['None','none']: 
+                    data[nom_pays]['People and Society']['Age structure']['25-54 years']['text'] = liste_info[11]
+                if liste_info[12] not in ['None','none']: 
+                    data[nom_pays]['People and Society']['Age structure']['55-64 years']['text'] = liste_info[12]
+                if liste_info[13] not in ['None','none']: 
+                    data[nom_pays]['People and Society']['Age structure']['65 years and over']['text'] = liste_info[13]
+                print('Vos informations complementaires ont bien ete enregistrees : ')
+
+        
+        # Si la suggestion est refusée ou quand la modification a ete enregistree 
+        del sugges[0]
+        n= len(sugges) # On supprime le premier element de la liste de selection 
+    
+    print("La liste de suggestion est vide")
 
 
     

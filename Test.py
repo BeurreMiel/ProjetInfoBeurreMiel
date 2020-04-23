@@ -1,6 +1,6 @@
 from Data import data
 from Data import users
+from Data import sugges
 import FonctionBD as fbd
 
-
-print("Affichage : ", fbd.affichage(82))
+fbd.gestion_suggestion()
