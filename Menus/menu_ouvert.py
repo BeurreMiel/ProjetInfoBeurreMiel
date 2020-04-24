@@ -1,4 +1,4 @@
-class Ouvert: 
+class Ouvert: #Permet l'ouverture d'un menu
     def __init__(self,content): 
         # content est un dictonnaire contenant les actions possibles du menu actuel
         self.content = content 
