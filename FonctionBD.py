@@ -551,3 +551,4 @@ def representationgraphique(critere):
     #Boxplot des tranches d'âges
     plt.boxplot([TR1,TR2,TR3,TR4,TR5])
     plt.show()
+        
