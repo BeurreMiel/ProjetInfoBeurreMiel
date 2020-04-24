@@ -274,6 +274,17 @@ def account_list(users):
         liste.append(i['ID']['username'])
     return(liste)
 
+def password_list(users): 
+    liste =[]
+    for i in users : 
+        liste.append(i['ID']['mdp'])
+    return(liste)
+
+def type_liste(users): 
+    liste =[]
+    for i in users : 
+        liste.append(i['type'])
+    return(liste)
 # Fonction de creation de compte 
 def ajout_compte(users): 
     # On suppose que le compte qui a accès à cette fonction est administrateur
