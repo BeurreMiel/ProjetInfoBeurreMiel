@@ -1,17 +1,34 @@
-from Data import *
+import json
 import numpy
+import matplotlib.pyplot as plt
 from FonctionBD import account_list
 from FonctionBD import password_list
 from FonctionBD import type_liste
 from FonctionBD import get_code
 from FonctionBD import is_number
+from Menus.menu_ouvert import Ouvert
+from Menus.menu_ferme import Ferme
 
 class Individu:     
     def __init__(self):
-        self.acteur="individu"
-            
-    def affichage(self,nom_ou_code_pays):
+        self.type="individu"
+        self.content_ini = {}
+    
+    #Permet à tout individu de quitter 
+    def quitter(self,content): 
+        check = input("Voulez vous quitter ? (Y/N) ")
+        if check in ["O","o"] : 
+            return Ferme()
+        else : 
+            return Ouvert(content)
 
+    def affichage(self,nom_ou_code_pays):
+        # Chargement de la base de données 
+        filename="country.json"
+        with open(filename) as json_file:
+            data = json.load(json_file)
+        
+        #Affichage
         if is_number(nom_ou_code_pays) is False :
     
             code = ''
@@ -69,7 +86,7 @@ class Individu:
 # Classe consultant 
 class Consultant(Individu):
     def __init__(self):
-        self.acteur="Consultant"
+        self.type="Consultant"
         
     def ajout_suggestion(self): 
         
@@ -110,7 +127,7 @@ class Consultant(Individu):
         sugges.append(liste_info)
         with open("Suggestions.json", "w") as write_file:
             json.dump(sugges, write_file)
-            
+
 # Classe géographe
 class Geographe(Individu): 
     def __init__(self):
@@ -157,6 +174,11 @@ class Geographe(Individu):
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
             return("Normalement on doit revenir au menu précédent")
 
+        filename="country.json"
+        with open(filename) as json_file:
+            data = json.load(json_file)
+
+            
         while True : 
             Nom = input("Entrer le nom du pays a ajouter : ") 
             #on suppose dans un premier temps que l'user rentre quelque chose 
@@ -483,3 +505,136 @@ class DataScientist(Consultant):
             #Boxplot des tranches d'âges
             plt.boxplot([TR1,TR2,TR3,TR4,TR5])
             plt.show()
+
+class Admin(Geographe, DataScientist):
+    
+    def __init__(self):
+        self.connecte = False
+        self.type = "Admin"
+    
+    def connexion(self): 
+        lcomptes = account_list(users)
+        lmdp = password_list(users)
+        ltype = type_liste(users)
+
+        pseudo = input("Veuillez entrer votre nom d'utilisateur : ")
+        mdp = input("Veuillez entrer votre mot de passe : ")
+
+        for i in range(len(lcomptes)): 
+            if (self.type == ltype[i] and mdp == lmdp[i] and pseudo == lcomptes[i]): 
+                self.connecte = True 
+                print("Vous êtes connecté !")
+                input("Appuyez sur n'importe quelle touche pour continuer : ")
+                break
+        
+        if not self.connecte: 
+            print("Échec de la connextion !")
+            input("Appuyez sur n'importe quelle touche pour continuer : ")
+
+        return self.connecte
+    
+    def deconnexion(self): 
+        if not self.connecte: 
+            print("Vous n'êtes pas connecté : ")
+            return("On doit revenir au menu précédent")
+        else : 
+            confirmation = input("Voulez vous vraiment vous déconnecter ? (Y/N) ")
+            if confirmation in ["Y","y"] : 
+                self.connecte = False 
+                print("Déconnexion réussie")
+            else : 
+                print ("Déconnextion échouée")
+        
+        return("On doit revenir au menu précédent")
+        
+    def suppression(self,nom_ou_code_pays):
+        if not self.connecte : 
+            print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
+            return("Normalement on doit revenir au menu précédent")
+
+        filename="country.json"
+        with open(filename) as json_file:
+            data = json.load(json_file)
+
+
+        if is_number(nom_ou_code_pays) is True :
+            if nom_ou_code_pays > len(data) :
+                raise NameError('Pays introuvable')
+    
+        if is_number(nom_ou_code_pays) is False :
+    
+            code = ''
+    
+            for code_pays in range(len(data)) :
+    
+                if data[code_pays].get('Government') :
+                    if data[code_pays]['Government'].get('Country name') :
+                        if data[code_pays]['Government']['Country name'].get('conventional long form') :
+                            if data[code_pays]['Government']['Country name']['conventional long form']['text'] == nom_ou_code_pays :
+                                code = code_pays
+                        if data[code_pays]['Government']['Country name'].get('conventional short form') :
+                            if data[code_pays]['Government']['Country name']['conventional short form']['text'] == nom_ou_code_pays :
+                                code = code_pays
+                        if data[code_pays]['Government']['Country name'].get('local long form') :
+                            if data[code_pays]['Government']['Country name']['local long form']['text'] == nom_ou_code_pays :
+                                code = code_pays
+                        if data[code_pays]['Government']['Country name'].get('local short form') :
+                            if data[code_pays]['Government']['Country name']['local short form']['text'] == nom_ou_code_pays :
+                                code = code_pays
+    
+            if code == '' :
+                raise NameError('Pays introuvable')
+            else :
+                nom_ou_code_pays = code
+    
+        del data[nom_ou_code_pays]
+
+
+    def ajout_compte(self): 
+    # On suppose que le compte qui a accès à cette fonction est administrateur
+        new = {}
+        new['ID'] = {}
+        while True : 
+            type_user = input("Entrez le type d'utilisateur que vous souhaitez creer : (G/D) ")
+            if type_user in ["G","g","D","D"] : #teste si c'est bien le bon type 
+                break
+        id_user = input("Entrez l'ID utilisateur que vous souhaitez creer : ")
+        new['ID']['username'] = id_user
+        mdp_user = input("Entrez le mot de passe utilisateur que vous souhaitez creer : ")
+        mdp_confirmation = input("Confirmez votre mot de passe : ")
+        while mdp_user != mdp_confirmation : 
+            mdp_confirmation = input("Les deux mots de passe ne correspondent pas, veuiller reessayer : ")
+        new['ID']['mdp'] = mdp_user
+        new['type'] = type_user
+    
+        print("L'utilisateur",id_user,"vient d'etre cree et va etre ajouter a la base")
+        users.append(new)
+        with open("user.json", "w") as write_file:
+            json.dump(users, write_file)
+
+
+    def suppression_compte(self): 
+        liste = account_list(users)
+        nom = input("Veuillez donner le nom du compte a supprimer : ")
+        if nom in liste : 
+            numero = liste.index(nom)
+            del users[numero]
+        with open("user.json", "w") as write_file:
+            json.dump(users, write_file)
+
+    def  gestion_compte(self): 
+        if not self.connecte : 
+            print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
+            return("Normalement on doit revenir au menu précédent")
+        print("#### Gestion des comptes ####")
+        choix = input("Voulez vous ajouter ou supprimer un compte ? : (A/S) ")
+        if choix in ["a", "A"]: 
+            self.ajout_compte()
+            return(Ouvert(previous)) # à finir
+        elif  choix in ["s", "S"]: 
+            self.ajout_compte()
+            return(Ouvert(previous)) # à finir
+        else :
+            print("Aucun changement effectué")
+            input("Appuyez sur n'importe quelle touche pour continuer")
+            return(Ouvert(previous))

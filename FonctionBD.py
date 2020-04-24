@@ -2,6 +2,7 @@
 from Data import data
 from Data import users
 from Data import sugges
+import matplotlib.pyplot as plt
 import json
 import numpy
 # Les bases de données ne sont pas modifíées totalement pour l'instant, à faire après 
