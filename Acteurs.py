@@ -66,7 +66,51 @@ class Individu:
                             ['Classe des 25-54 ans', inf11['25-54 years']['text']],
                             ['Classe des 55-64 ans', inf11['55-64 years']['text']],
                             ['Classe des 65 ans et plus', inf11['65 years and over']['text']]])
-
+# Classe consultant 
+class Consultant(Individu):
+    def __init__(self):
+        self.acteur="Consultant"
+        
+    def ajout_suggestion(self): 
+        
+        liste_info = []
+        Nom = input("Entrer le nom du pays a ajouter : ") 
+        liste_info.append(Nom)
+        superficie = input('Entrez la superficie du pays en km2, tapez None pour passer la question :')
+        liste_info.append(superficie)
+        pop = input('Entrez la population du pays en million d\'individus , tapez None pour passer la question :')
+        liste_info.append(pop)
+        crois = input('Entrez la croissance demographique du pays en pourcentage , tapez None pour passer la question :')
+        liste_info.append(crois)
+        inflation = input('Entrez l\'inflation du pays en pourcetage, tapez None pour passer la question :')
+        liste_info.append(inflation)
+        dette = input('Entrez la dette du pays en million de dollars, tapez None pour passer la question :')
+        liste_info.append(dette)
+        chom = input('Entrez la taux de chomage du pays en pourcentage, tapez None pour passer la question :')
+        liste_info.append(chom)
+        sante = input('Entrez le taux de depense en sante du pays en pourcentage, tapez None pour passer la question :')
+        liste_info.append(sante)
+        edu = input('Entrez le taux de depense en education du pays en pourcentage, tapez None pour passer la question :')
+        liste_info.append(edu)
+        army = input('Entrez le taux de depense militaire du pays en pourcentage, tapez None pour passer la question :')
+        liste_info.append(army)
+    
+        # Entree des 5 classes d\'age
+        age1 = input('Entrez le pourcentage de la classe 1, tapez None pour passer la question : ')
+        liste_info.append(age1)
+        age2 = input('Entrez le pourcentage de la classe 2, tapez None pour passer la question : ')
+        liste_info.append(age2)
+        age3 = input('Entrez le pourcentage de la classe 3, tapez None pour passer la question : ')
+        liste_info.append(age3)
+        age4 = input('Entrez le pourcentage de la classe 4, tapez None pour passer la question : ')
+        liste_info.append(age4)
+        age5 = input('Entrez le pourcentage de la classe 5, tapez None pour passer la question : ')
+        liste_info.append(age5)
+    
+        sugges.append(liste_info)
+        with open("Suggestions.json", "w") as write_file:
+            json.dump(sugges, write_file)
+            
 # Classe géographe
 class Geographe(Individu): 
     def __init__(self):
@@ -267,3 +311,175 @@ class Geographe(Individu):
         
         print("La liste de suggestion est vide")
 
+# Classe Data Scientist
+
+class DataScientist(Consultant): 
+    def __init__(self):
+        self.connecte = False
+        self.type = "DataScientist"
+    
+    def connexion(self): 
+        lcomptes = account_list(users)
+        lmdp = password_list(users)
+        ltype = type_liste(users)
+
+        pseudo = input("Veuillez entrer votre nom d'utilisateur : ")
+        mdp = input("Veuillez entrer votre mot de passe : ")
+
+        for i in range(len(lcomptes)): 
+            if (self.type == ltype[i] and mdp == lmdp[i] and pseudo == lcomptes[i]): 
+                self.connecte = True 
+                print("Vous êtes connecté !")
+                input("Appuyez sur n'importe quelle touche pour continuer : ")
+                break
+        
+        if not self.connecte: 
+            print("Échec de la connextion !")
+            input("Appuyez sur n'importe quelle touche pour continuer : ")
+
+        return self.connecte
+    
+    def deconnexion(self): 
+        if not self.connecte: 
+            print("Vous n'êtes pas connecté : ")
+            return("On doit revenir au menu précédent")
+        else : 
+            confirmation = input("Voulez vous vraiment vous déconnecter ? (Y/N) ")
+            if confirmation in ["Y","y"] : 
+                self.connecte = False 
+                print("Déconnexion réussie")
+            else : 
+                print ("Déconnextion échouée")
+        
+        return("On doit revenir au menu précédent")
+
+    def representationgraphique(self,critere):
+        if not self.connecte : 
+            print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
+            return("Normalement on doit revenir au menu précédent")
+        #Erreurs
+        if critere<2 or critere>10 :
+            return('Critère inexistant')
+            
+        tranche1=[]
+        tranche2=[]
+        tranche3=[]
+        tranche4=[]
+        tranche5=[]
+        crit=[]
+        pays=[]
+
+        #Séparation des tranches d'âges
+        for j in range (len(data)):
+            if data[j].get('People and Society'):
+                if data[j]['People and Society'].get('Age structure'):
+                    tranche1.append(data[j]['People and Society']['Age structure']['0-14 years']['text'])
+                    tranche2.append(data[j]['People and Society']['Age structure']['15-24 years']['text'])
+                    tranche3.append(data[j]['People and Society']['Age structure']['25-54 years']['text'])
+                    tranche4.append(data[j]['People and Society']['Age structure']['55-64 years']['text'])
+                    tranche5.append(data[j]['People and Society']['Age structure']['65 years and over']['text'])
+    
+        #On garde les pourcentages
+        TR1=[]
+        for z in range(len(tranche1)):
+            TR1.append(float(tranche1[z][:tranche1[z].find('%')]))
+                            
+        TR2=[]
+        for z in range(len(tranche2)):
+            TR2.append(float(tranche2[z][:tranche2[z].find('%')]))
+        
+        TR3=[]
+        for z in range(len(tranche3)):
+            TR3.append(float(tranche3[z][:tranche3[z].find('%')]))    
+        
+        TR4=[]
+        for z in range(len(tranche4)):
+            TR4.append(float(tranche4[z][:tranche4[z].find('%')]))    
+    
+        TR5=[]
+        for z in range(len(tranche5)):
+            TR5.append(float(tranche5[z][:tranche5[z].find('%')]))
+            
+            
+            
+        #Pour réaliser le diagramme en barres d’un certain critère  
+        for i in range (len(data)):
+            if critere==2:
+                if data[i].get('Geography') and data[i].get('Government'):
+                    if data[i]['Geography'].get('Area') and data[i]['Government'].get('Country name'):
+                        if data[i]['Geography']['Area'].get('total') and data[i]['Government']['Country name'].get('conventional short form'):
+                            
+                            crit.append(data[i]['Geography']['Area']['total']['text'])
+                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==3:
+                if data[i].get('People and Society') and data[i].get('Government'):
+                    if data[i]['People and Society'].get('Population') and data[i]['Government'].get('Country name'):
+                        if data[i]['Government']['Country name'].get('conventional short form'):
+                            
+                                crit.append(data[i]['People and Society']['Population']['text'])
+                                pays.append(data[i]['Government']['Country name']['conventional short form']['text'])        
+            
+            elif critere==4:
+                if data[i].get('People and Society') and data[i].get('Government'):
+                    if data[i]['People and Society'].get('Population growth rate') and data[i]['Government'].get('Country name'):
+                        if data[i]['Government']['Country name'].get('conventional short form'):
+                            
+                            crit.append(data[i]['People and Society']['Population growth rate']['text'])
+                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==5:
+                if data[i].get('Economy') and data[i].get('Government'):
+                    if data[i]['Economy'].get('Inflation rate (consumer prices)') and data[i]['Government'].get('Country name'):
+                        if data[i]['Government']['Country name'].get('conventional short form'):
+                            
+                            crit.append(data[i]['Economy']['Inflation rate (consumer prices)']['text'])
+                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==6:
+                if data[i].get('Economy') and data[i].get('Government'):
+                    if data[i]['Economy'].get('Debt - external') and data[i]['Government'].get('Country name'):
+                        if data[i]['Government']['Country name'].get('conventional short form'):
+                
+                            crit.append(data[i]['Economy']['Debt - external']['text'])
+                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==7:
+                if data[i].get('Economy') and data[i].get('Government'):
+                    if data[i]['Economy'].get('Unemployment rate') and data[i]['Government'].get('Country name'):
+                        if data[i]['Government']['Country name'].get('conventional short form'):
+                
+                            crit.append(data[i]['Economy']['Unemployment rate']['text'])
+                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==8:
+                if data[i].get('People and Society') and data[i].get('Government'):
+                    if data[i]['People and Society'].get('Health expenditures') and data[i]['Government'].get('Country name'):
+                        if data[i]['Government']['Country name'].get('conventional short form'):
+                
+                            crit.append(data[i]['People and Society']['Health expenditures']['text'])
+                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==9:
+                if data[i].get('People and Society') and data[i].get('Government'):
+                    if data[i]['People and Society'].get('Education expenditures') and data[i]['Government'].get('Country name'):
+                        if data[i]['Government']['Country name'].get('conventional short form'):
+                
+                            crit.append(data[i]['People and Society']['Education expenditures']['text'])
+                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==10:
+                if data[i].get('Military and Security') and data[i].get('Government'):
+                    if data[i]['Military and Security'].get('Military expenditures') and data[i]['Government'].get('Country name'):
+                        if data[i]['Government']['Country name'].get('conventional short form'):
+                
+                            crit.append(data[i]['Military and Security']['Military expenditures']['text']) 
+                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            #Diagramme en barre du critère
+            plt.bar(pays,crit)
+            plt.show()
+            
+            #Boxplot des tranches d'âges
+            plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+            plt.show()
