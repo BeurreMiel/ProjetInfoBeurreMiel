@@ -17,7 +17,7 @@ class Main_menu:
         print("༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ")
         print("\n")
         bye = Figlet(font='big')
-        print(bye.renderText('Bye Bye'))
+        print(bye.renderText('Beurre Miel'))
 
     def new_menu(self, content):
         vue_actuelle = Ouvert(content)
