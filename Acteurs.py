@@ -17,7 +17,7 @@ class Individu:
     # Permet à tout individu de quitter 
     def quitter(self,content): 
         check = input("Voulez vous quitter ? (Y/N) ")
-        if check in ["O","o"] : 
+        if check in ["Y","Y"] : 
             return Ferme()
         else : 
             return Ouvert(content)
