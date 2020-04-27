@@ -22,9 +22,9 @@ class Individu:
         else : 
             return Ouvert(content)
 
-    def affichage(self,nom_ou_code_pays,previous):
+    def affichage(self,content):
         # Chargement de la base de données 
-        
+        nom_ou_code_pays = input("Entrez le nom ou le code du pays : ")
         filename="country.json"
         with open(filename) as json_file:
             data = json.load(json_file)
@@ -56,7 +56,9 @@ class Individu:
             else :
                 nom_ou_code_pays = code
     
-    
+        print("Code du pays sélectionné : ",nom_ou_code_pays)
+        nom_ou_code_pays = int(nom_ou_code_pays)
+
         inf1 = data[nom_ou_code_pays]['Government']['Country name']['conventional short form']['text']
         inf2 = data[nom_ou_code_pays]['Geography']['Area']['total']['text']
         inf3 = data[nom_ou_code_pays]['People and Society']['Population']['text']
@@ -85,8 +87,8 @@ class Individu:
                             ['Classe des 55-64 ans', inf11['55-64 years']['text']],
                             ['Classe des 65 ans et plus', inf11['65 years and over']['text']]])
         print(res)
-        input("Affichage terminé, appuyez sur n'importe quelle touche pour continuer")
-        return(Ouvert(previous))
+        input("Affichage terminé, appuyez sur Entrer pour continuer. ")
+        return(Ouvert(content))
 # Classe consultant 
 class Consultant(Individu):
     def __init__(self):
@@ -95,7 +97,7 @@ class Consultant(Individu):
     def ajout_suggestion(self,previous): 
         
         liste_info = []
-        Nom = input("Entrer le nom du pays a ajouter : ") 
+        Nom = input("Entrer le nom du pays de la suggestion : ") 
         liste_info.append(Nom)
         superficie = input('Entrez la superficie du pays en km2, tapez None pour passer la question :')
         liste_info.append(superficie)
@@ -136,14 +138,14 @@ class Consultant(Individu):
             json.dump(sugges, write_file)
 
         print("Votre proposition a bien été enregistrée")
-        input("Appuyez sur n'importe quelle touche pour continuer")
+        input("Appuyez sur Entrer pour continuer")
 
         return(Ouvert(previous))
 # Classe géographe
 class Geographe(Individu): 
     def __init__(self):
         self.connecte = False
-        self.type = "geo"
+        self.type = "Geographe"
     
     def connexion(self): 
         with open("user.json") as json_file:
@@ -269,8 +271,6 @@ class Geographe(Individu):
             if liste_info[13] not in ['None','none']: 
                 entree['People and Society']['Age structure']['65 years and over']['text'] = liste_info[13]
             print('Vos informations complementaires ont bien ete enregistrees')
-            print("Le pays suivant va etre ajoute : ")
-            print(entree)
         with open("country.json") as json_file: 
             data =json.load(json_file)
         data.append(entree)
@@ -288,6 +288,10 @@ class Geographe(Individu):
 
         with open("Suggestions.json") as json_file: 
             sugges =json.load(json_file)
+
+        
+        with open("country.json") as json_file:
+            data = json.load(json_file)
 
         n = len(sugges)
         while n > 0 :
@@ -360,7 +364,7 @@ class Geographe(Individu):
 
         with open("Suggestions.json", "w") as write_file:
             json.dump(sugges, write_file)
-        input("Appuyez sur n'importe quelle touche pour continuer")
+        input("Appuyez sur Entrer pour continuer ")
 
         return(Ouvert(previous))
 
@@ -372,6 +376,9 @@ class DataScientist(Consultant):
         self.type = "DataScientist"
     
     def connexion(self): 
+        with open("user.json") as json_file:
+            users = json.load(json_file)
+
         lcomptes = account_list(users)
         lmdp = password_list(users)
         ltype = type_liste(users)
@@ -406,14 +413,20 @@ class DataScientist(Consultant):
         
         return("On doit revenir au menu précédent")
 
-    def representationgraphique(self,critere,previous):
+    def representationgraphique(self,content):
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
-            return("Normalement on doit revenir au menu précédent")
+            return(Ouvert(content))
 
         filename="country.json"
         with open(filename) as json_file:
             data = json.load(json_file)
+
+        # À faire sous forme de menu 
+
+        critere = input("Choisissez votre critère: ")
+        critere = int(critere)
+        
         #Erreurs
         if critere<2 or critere>10 :
             return('Critère inexistant')
@@ -535,23 +548,27 @@ class DataScientist(Consultant):
             
             #Diagramme en barre du critère
             plt.bar(pays,crit)
+            plt.title("Diagramme en barre du critère") 
             plt.show()
             
             #Boxplot des tranches d'âges
             plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+            plt.title("Boxplot par tranche d'âge du critère") 
             plt.show()
 
-            input("Appuyez sur n'importe quelle touche pour continuer")
-            return(Ouvert(previous))
+            input("Appuyez sur Entrer pour continuer")
+            return(Ouvert(content))
 
 # Classe administrateur
 class Admin(Geographe, DataScientist):
     
     def __init__(self):
         self.connecte = False
-        self.type = "Admin"
+        self.type = "Administrateur"
     
     def connexion(self): 
+        with open("user.json") as json_file:
+            users = json.load(json_file)
         lcomptes = account_list(users)
         lmdp = password_list(users)
         ltype = type_liste(users)
@@ -586,7 +603,7 @@ class Admin(Geographe, DataScientist):
         
         return("On doit revenir au menu précédent")
         
-    def suppression(self,nom_ou_code_pays,previous):
+    def suppression(self,content):
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
             return("Normalement on doit revenir au menu précédent")
@@ -594,6 +611,8 @@ class Admin(Geographe, DataScientist):
         filename="country.json"
         with open(filename) as json_file:
             data = json.load(json_file)
+
+        nom_ou_code_pays = input("Entrez le nom ou le code du pays : ")
 
         if is_number(nom_ou_code_pays) is True :
             if nom_ou_code_pays > len(data) :
@@ -624,14 +643,15 @@ class Admin(Geographe, DataScientist):
                 raise NameError('Pays introuvable')
             else :
                 nom_ou_code_pays = code
-    
+        nom_ou_code_pays = int(nom_ou_code_pays)
+
         del data[nom_ou_code_pays]
         with open("country.json", "w") as write_file:
             json.dump(data, write_file)
 
         print("Votre suppression a bien été enregistrée")
 
-        return(Ouvert(previous))
+        return(Ouvert(content))
 
 
 
@@ -639,13 +659,13 @@ class Admin(Geographe, DataScientist):
         with open("user.json") as json_file:
             users = json.load(json_file)
 
-    # On suppose que le compte qui a accès à cette fonction est administrateur
         new = {}
-        new['ID'] = {}
         while True : 
-            type_user = input("Entrez le type d'utilisateur que vous souhaitez creer : (G/D) ")
-            if type_user in ["G","g","D","D"] : #teste si c'est bien le bon type 
+            type_user = input("Entrez le type d'utilisateur que vous souhaitez creer : (Geographe/DDataScientist) ")
+            if type_user in ["Geographe","DataScientist"] : #teste si c'est bien le bon type 
                 break
+        new['type'] = type_user
+        new['ID'] = {}
         id_user = input("Entrez l'ID utilisateur que vous souhaitez creer : ")
         new['ID']['username'] = id_user
         mdp_user = input("Entrez le mot de passe utilisateur que vous souhaitez creer : ")
@@ -653,7 +673,7 @@ class Admin(Geographe, DataScientist):
         while mdp_user != mdp_confirmation : 
             mdp_confirmation = input("Les deux mots de passe ne correspondent pas, veuiller reessayer : ")
         new['ID']['mdp'] = mdp_user
-        new['type'] = type_user
+        
     
         print("L'utilisateur",id_user,"vient d'etre cree et va etre ajouter a la base")
         users.append(new)
@@ -666,26 +686,29 @@ class Admin(Geographe, DataScientist):
             users = json.load(json_file)
 
         liste = account_list(users)
+        print("Liste des comptes disponibles : ", liste)
         nom = input("Veuillez donner le nom du compte a supprimer : ")
         if nom in liste : 
             numero = liste.index(nom)
             del users[numero]
+        else : 
+            print("Aucun changement effectué")
         with open("user.json", "w") as write_file:
             json.dump(users, write_file)
 
-    def  gestion_compte(self,previous): 
+    def  gestion_comptes(self,content): 
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
-            return("Normalement on doit revenir au menu précédent")
+            return(Ouvert(content))
         print("#### Gestion des comptes ####")
         choix = input("Voulez vous ajouter ou supprimer un compte ? : (A/S) ")
         if choix in ["a", "A"]: 
             self.ajout_compte()
-            return(Ouvert(previous)) # à finir
+            return(Ouvert(content)) # à finir
         elif  choix in ["s", "S"]: 
-            self.ajout_compte()
-            return(Ouvert(previous)) # à finir
+            self.suppression_compte()
+            return(Ouvert(content)) # à finir
         else :
             print("Aucun changement effectué")
             input("Appuyez sur n'importe quelle touche pour continuer")
-            return(Ouvert(previous))
+            return(Ouvert(content))

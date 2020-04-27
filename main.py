@@ -5,6 +5,5 @@ if __name__ == '__main__':
     
     menus = Main_menu()
     menus.Bienvenue()
-    menus.Banner()
     menus.new_menu(menu[0])
     menus.Au_revoir()

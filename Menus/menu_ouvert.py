@@ -4,6 +4,9 @@ class Ouvert: #Permet l'ouverture d'un menu
         self.content = content 
 
     def run(self): 
+        print("༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ")
+        print("\n")
+        
         if len(self.content["path"]) != 0:
             chemin = self.content["path"][0]
             if len(self.content["path"]) > 2:

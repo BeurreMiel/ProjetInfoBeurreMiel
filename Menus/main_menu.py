@@ -8,6 +8,7 @@ class Main_menu:
     def Bienvenue(self):
         welcome = Figlet(font='big')
         print(welcome.renderText('Bienvenue'))
+        
     def Banner(self): 
         print("༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ")
         print("\n")
