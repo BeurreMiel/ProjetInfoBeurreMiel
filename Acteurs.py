@@ -418,7 +418,7 @@ class DataScientist(Consultant):
             if (self.type == ltype[i] and mdp == lmdp[i] and pseudo == lcomptes[i]): 
                 self.connecte = True 
                 print("Vous êtes connecté !")
-                input("Appuyez sur n'importe quelle touche pour continuer : ")
+                input("Appuyez sur Entrer pour continuer : ")
                 break
         
         if not self.connecte: 
@@ -535,12 +535,12 @@ class DataScientist(Consultant):
                             pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
             
             elif critere==6:
-                if data[i].get('Economy') and data[i].get('Government'):
-                    if data[i]['Economy'].get('Debt - external') and data[i]['Government'].get('Country name'):
-                        if data[i]['Government']['Country name'].get('conventional short form'):
-                
-                            crit.append(data[i]['Economy']['Debt - external']['text'])
-                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+             if data[i].get('Economy') and data[i].get('Government'):
+                if data[i]['Economy'].get('Debt - external') and data[i]['Government'].get('Country name'):
+                    if data[i]['Economy']['Debt - external'].get('text') and data[i]['Government']['Country name'].get('conventional short form'):
+
+                        crit.append(data[i]['Economy']['Debt - external']['text'])
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
             
             elif critere==7:
                 if data[i].get('Economy') and data[i].get('Government'):
@@ -608,7 +608,7 @@ class Admin(Geographe, DataScientist):
             if (self.type == ltype[i] and mdp == lmdp[i] and pseudo == lcomptes[i]): 
                 self.connecte = True 
                 print("Vous êtes connecté !")
-                input("Appuyez sur n'importe quelle touche pour continuer : ")
+                input("Appuyez sur Entrer pour continuer : ")
                 break
         
         if not self.connecte: 
