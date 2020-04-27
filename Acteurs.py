@@ -16,6 +16,16 @@ class Individu:
         self.previous_menu_ini = {}
     # Permet à tout individu de quitter 
     def quitter(self,previous_menu): 
+        """ Fonction permettant de quitter l'application
+
+        Arguments:
+            previous_menu {list} -- menu précédent l'appel de la fonction
+
+        Returns:
+            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+            [Ferme()] -- [Quitte l'application]
+        """        
+
         check = input("Voulez vous quitter ? (Y/N) ")
         if check in ["Y","Y"] : 
             return Ferme()
@@ -23,6 +33,15 @@ class Individu:
             return Ouvert(previous_menu)
 
     def affichage(self,previous_menu):
+        """ Affichage d'un pays 
+
+        Arguments:
+            previous_menu {list} -- Menu précédent l'appel de la fonction
+            nom_ou_code_pays {string} -- Nom ou code du pays à afficher
+        Returns:
+            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+            
+        """    
         # Chargement de la base de données 
         nom_ou_code_pays = input("Entrez le nom ou le code du pays : ")
         filename="country.json"
@@ -95,6 +114,14 @@ class Consultant(Individu):
         self.type="Consultant"
         
     def ajout_suggestion(self,previous_menu): 
+        """ Affichage d'un pays 
+
+        Arguments:
+            previous_menu {list} -- Menu précédent l'appel de la fonction
+        Returns:
+            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+            
+        """    
         
         liste_info = []
         Nom = input("Entrer le nom du pays de la suggestion : ") 
@@ -661,7 +688,7 @@ class Admin(Geographe, DataScientist):
 
         new = {}
         while True : 
-            type_user = input("Entrez le type d'utilisateur que vous souhaitez creer : (Geographe/DDataScientist) ")
+            type_user = input("Entrez le type d'utilisateur que vous souhaitez creer : (Geographe/DataScientist) ")
             if type_user in ["Geographe","DataScientist"] : #teste si c'est bien le bon type 
                 break
         new['type'] = type_user

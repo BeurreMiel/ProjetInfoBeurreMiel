@@ -7,6 +7,11 @@ class Ouvert: #Permet l'ouverture d'un menu
         self.previous_menu = previous_menu 
 
     def run(self): 
+        """ Déroulement du menu actuel
+
+        Returns:
+            actions[choix-1](self.previous_menu) -- Menu suivant sélectionné 
+        """        
         clear()
         display = Figlet(font='big')
         print(display.renderText('Menu :'))

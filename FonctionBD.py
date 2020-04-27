@@ -13,7 +13,7 @@ clear = lambda: os.system('cls')
 #### FICHIER DE REGROUPEMENT DES FONCTIONS ANNEXES ####
 
 # Fonction de creation de pays vide 
-def pays_vide(): 
+def pays_vide():   
     entree = {}
     entree['Government'] = {}
     entree['Government']['Country name'] = {}
@@ -49,6 +49,14 @@ def pays_vide():
 
 # Fonction test d'un nombre ou d'une chaîne de caractère
 def is_number(s):
+    """ Teste si la variable entrée est un nombre
+
+    Arguments:
+        s {int,float,str} -- variable à tester
+
+    Returns:
+        {bool} -- Test vérifié ou non 
+    """    
     try:
         float(s)
         return True
@@ -57,6 +65,14 @@ def is_number(s):
 
 # Fonction de récupération de code pays 
 def get_code(nom_pays): 
+    """Permet de récuperer le code d'un pays dans la base de donnée
+
+    Arguments:
+        nom_pays {str} -- Nom du pays à récupérer
+
+    Raises:
+        NameError: Le pays n'est pas dans la base
+    """    
     code = ''
     for code_pays in range(len(data)) :
         code = ''
@@ -93,18 +109,33 @@ def get_code(nom_pays):
 # Fonction de création de listes 
 # liste des comptes 
 def account_list(users): 
+    """Permet de récupérer la liste des utilisateurs
+
+    Arguments:
+        users {list of dict} -- Base de données utilisateurs
+    """    
     liste =[]
     for i in users : 
         liste.append(i['ID']['username'])
     return(liste)
 
 def password_list(users): 
+    """Permet de récupérer la liste des mots de passes
+
+    Arguments:
+        users {list of dict} -- Base de données utilisateurs
+    """    
     liste =[]
     for i in users : 
         liste.append(i['ID']['mdp'])
     return(liste)
 
 def type_liste(users): 
+    """Permet de récupérer la liste des types par utilisateurs
+
+    Arguments:
+        users {list of dict} -- Base de données utilisateurs
+    """    
     liste =[]
     for i in users : 
         liste.append(i['type'])

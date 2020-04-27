@@ -7,16 +7,24 @@ class Main_menu:
         pass
     
     def Bienvenue(self):
+        """ 
+            [Création du message de Bienvenue] 
+            Se déclanche au lancement de l'application 
+        """        
         clear()
         welcome = Figlet(font='big')
         print(welcome.renderText('Bienvenue'))
         input("Appuyez sur Entrer pour lancer l'application : ")
 
     def Banner(self): 
+        """[Non utilisée]
+        """        
         print("༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ")
         print("\n")
 
     def Au_revoir(self): 
+        """[Création du message de départ de l'application]
+        """        
         print("\n")
         print("༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ")
         print("\n")
@@ -24,6 +32,14 @@ class Main_menu:
         print(bye.renderText('Beurre Miel'))
 
     def new_menu(self, previous_menu):
+        """Affichage du menu actuel
+
+        Arguments:
+            previous_menu {list} -- Menu précédent permettant de revenir au menu
+
+        Returns:
+            vue_actuelle {list} -- Menu actuel
+        """         
         vue_actuelle = Ouvert(previous_menu)
         while vue_actuelle:
             vue_actuelle = vue_actuelle.run()
