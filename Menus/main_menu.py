@@ -24,7 +24,8 @@ class Main_menu:
 
     def Au_revoir(self): 
         """[Création du message de départ de l'application]
-        """        
+        """       
+        clear() 
         print("\n")
         print("༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ")
         print("\n")

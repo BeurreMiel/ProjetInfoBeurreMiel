@@ -9,6 +9,7 @@ from FonctionBD import get_code
 from FonctionBD import is_number
 from Menus.menu_ouvert import Ouvert
 from Menus.menu_ferme import Ferme
+import getpass
 
 class Individu:     
     def __init__(self):
@@ -183,7 +184,7 @@ class Geographe(Individu):
         ltype = type_liste(users)
 
         pseudo = input("Veuillez entrer votre nom d'utilisateur : ")
-        mdp = input("Veuillez entrer votre mot de passe : ")
+        mdp = getpass.getpass("Veuillez entrer votre mot de passe : ")
 
         for i in range(len(lcomptes)): 
             if (self.type == ltype[i] and mdp == lmdp[i] and pseudo == lcomptes[i]): 
@@ -411,7 +412,7 @@ class DataScientist(Consultant):
         ltype = type_liste(users)
 
         pseudo = input("Veuillez entrer votre nom d'utilisateur : ")
-        mdp = input("Veuillez entrer votre mot de passe : ")
+        mdp = getpass.getpass("Veuillez entrer votre mot de passe : ")
 
         for i in range(len(lcomptes)): 
             if (self.type == ltype[i] and mdp == lmdp[i] and pseudo == lcomptes[i]): 
@@ -601,7 +602,7 @@ class Admin(Geographe, DataScientist):
         ltype = type_liste(users)
 
         pseudo = input("Veuillez entrer votre nom d'utilisateur : ")
-        mdp = input("Veuillez entrer votre mot de passe : ")
+        mdp = getpass.getpass("Veuillez entrer votre mot de passe : ")
 
         for i in range(len(lcomptes)): 
             if (self.type == ltype[i] and mdp == lmdp[i] and pseudo == lcomptes[i]): 
