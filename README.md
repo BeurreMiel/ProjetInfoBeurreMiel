@@ -1,6 +1,6 @@
 # Projet Info BeurreMiel
 
-SOULI (et Mailine apparemment) est accro au café 
+SOULI et totalement Mailine est accro au café 
 
 # Last Updates : 
 
