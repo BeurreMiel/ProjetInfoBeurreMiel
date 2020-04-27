@@ -1,24 +1,30 @@
+from pyfiglet import Figlet
+from FonctionBD import clear
+
 class Ouvert: #Permet l'ouverture d'un menu
-    def __init__(self,content): 
-        # content est un dictonnaire contenant les actions possibles du menu actuel
-        self.content = content 
+    def __init__(self,previous_menu): 
+        # previous_menu est un dictonnaire contenant les actions possibles du menu actuel
+        self.previous_menu = previous_menu 
 
     def run(self): 
+        clear()
+        display = Figlet(font='big')
+        print(display.renderText('Menu :'))
         print("༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ")
         print("\n")
         
-        if len(self.content["path"]) != 0:
-            chemin = self.content["path"][0]
-            if len(self.content["path"]) > 2:
-                for section in self.content["path"][2:]:
+        if len(self.previous_menu["path"]) != 0:
+            chemin = self.previous_menu["path"][0]
+            if len(self.previous_menu["path"]) > 2:
+                for section in self.previous_menu["path"][2:]:
                     chemin += " -> {}".format(section)
-            print("{} : {}\n".format(chemin, self.content["question"]))
-        else : print("{}\n".format(self.content["question"]))
+            print("{} : {}\n".format(chemin, self.previous_menu["question"]))
+        else : print("{}\n".format(self.previous_menu["question"]))
         
         # Options et actions possibles 
-        options = self.content["options"]
+        options = self.previous_menu["options"]
         nb_options = len(options)
-        actions = self.content["actions"]
+        actions = self.previous_menu["actions"]
         
         # Affichage des options
         for i, opt in enumerate(options):
@@ -38,4 +44,4 @@ class Ouvert: #Permet l'ouverture d'un menu
                 print(" La valeur doit être comprise entre 1 et {}.".format(nb_options))
                 continue 
             break
-        return actions[choix-1](self.content)
+        return actions[choix-1](self.previous_menu)

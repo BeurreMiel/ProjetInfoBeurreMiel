@@ -5,8 +5,8 @@ from Acteurs import Geographe
 from Acteurs import DataScientist
 from Acteurs import Admin
 
-def connexion(content): 
-    menu_act = content
+def connexion(previous_menu): 
+    menu_act = previous_menu
 
     if menu_act["individu"].connexion() : #Vérifie si l'acteur peut se connecter et est connecté  
         # On retire à l'utilisateur la possibilité de se co
@@ -30,10 +30,10 @@ menu = [
         "question" : "Selectionner votre type utilisateur",
         "options" : ["Consultant", "Géographe", "DataScientist", "Administrateur", "Quitter l'application"],
         "actions" : [
-            (lambda content :indices_actions(Consultant(),[1,4,8,9])),
-            (lambda content :indices_actions(Geographe(),[0,1,5,6,8,9])),
-            (lambda content :indices_actions(DataScientist(),[0,1,2,3,4,8,9])),
-            (lambda content :indices_actions(Admin(),[0,1,2,3,5,6,7,8,9])),
+            (lambda previous_menu :indices_actions(Consultant(),[1,4,8,9])),
+            (lambda previous_menu :indices_actions(Geographe(),[0,1,5,6,8,9])),
+            (lambda previous_menu :indices_actions(DataScientist(),[0,1,2,3,4,8,9])),
+            (lambda previous_menu :indices_actions(Admin(),[0,1,2,3,5,6,7,8,9])),
             Individu().quitter],
         "individu": Individu(),
         "path": []
@@ -54,14 +54,14 @@ menu = [
         "Quitter l'application"],#9
         "actions" : [
             connexion,
-            (lambda content :content["individu"].affichage(content)),
-            (lambda content :content["individu"].representationgraphique(content)),
-            (lambda content :content["individu"].resume(content)), # à faire 
-            (lambda content :content["individu"].ajout_suggestion(content)),
-            (lambda content :content["individu"].ajout_pays(content)),
-            (lambda content :content["individu"].gestion_suggestion(content)),
-            (lambda content :content["individu"].gestion_comptes(content)),
-            (lambda content : Ouvert(menu[0])),
+            (lambda previous_menu :previous_menu["individu"].affichage(previous_menu)),
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu)),
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu)), # à faire 
+            (lambda previous_menu :previous_menu["individu"].ajout_suggestion(previous_menu)),
+            (lambda previous_menu :previous_menu["individu"].ajout_pays(previous_menu)),
+            (lambda previous_menu :previous_menu["individu"].gestion_suggestion(previous_menu)),
+            (lambda previous_menu :previous_menu["individu"].gestion_comptes(previous_menu)),
+            (lambda previous_menu : Ouvert(menu[0])),
             Individu().quitter,
             ],
         "individu": Individu(),

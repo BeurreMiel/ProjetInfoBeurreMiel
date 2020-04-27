@@ -13,16 +13,16 @@ from Menus.menu_ferme import Ferme
 class Individu:     
     def __init__(self):
         self.type="individu"
-        self.content_ini = {}
+        self.previous_menu_ini = {}
     # Permet à tout individu de quitter 
-    def quitter(self,content): 
+    def quitter(self,previous_menu): 
         check = input("Voulez vous quitter ? (Y/N) ")
         if check in ["Y","Y"] : 
             return Ferme()
         else : 
-            return Ouvert(content)
+            return Ouvert(previous_menu)
 
-    def affichage(self,content):
+    def affichage(self,previous_menu):
         # Chargement de la base de données 
         nom_ou_code_pays = input("Entrez le nom ou le code du pays : ")
         filename="country.json"
@@ -88,13 +88,13 @@ class Individu:
                             ['Classe des 65 ans et plus', inf11['65 years and over']['text']]])
         print(res)
         input("Affichage terminé, appuyez sur Entrer pour continuer. ")
-        return(Ouvert(content))
+        return(Ouvert(previous_menu))
 # Classe consultant 
 class Consultant(Individu):
     def __init__(self):
         self.type="Consultant"
         
-    def ajout_suggestion(self,previous): 
+    def ajout_suggestion(self,previous_menu): 
         
         liste_info = []
         Nom = input("Entrer le nom du pays de la suggestion : ") 
@@ -140,7 +140,7 @@ class Consultant(Individu):
         print("Votre proposition a bien été enregistrée")
         input("Appuyez sur Entrer pour continuer")
 
-        return(Ouvert(previous))
+        return(Ouvert(previous_menu))
 # Classe géographe
 class Geographe(Individu): 
     def __init__(self):
@@ -413,10 +413,10 @@ class DataScientist(Consultant):
         
         return("On doit revenir au menu précédent")
 
-    def representationgraphique(self,content):
+    def representationgraphique(self,previous_menu):
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
-            return(Ouvert(content))
+            return(Ouvert(previous_menu))
 
         filename="country.json"
         with open(filename) as json_file:
@@ -557,7 +557,7 @@ class DataScientist(Consultant):
             plt.show()
 
             input("Appuyez sur Entrer pour continuer")
-            return(Ouvert(content))
+            return(Ouvert(previous_menu))
 
 # Classe administrateur
 class Admin(Geographe, DataScientist):
@@ -603,10 +603,10 @@ class Admin(Geographe, DataScientist):
         
         return("On doit revenir au menu précédent")
         
-    def suppression(self,content):
+    def suppression(self,previous_menu):
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
-            return("Normalement on doit revenir au menu précédent")
+            return(Ouvert(previous_menu))
 
         filename="country.json"
         with open(filename) as json_file:
@@ -651,7 +651,7 @@ class Admin(Geographe, DataScientist):
 
         print("Votre suppression a bien été enregistrée")
 
-        return(Ouvert(content))
+        return(Ouvert(previous_menu))
 
 
 
@@ -696,19 +696,19 @@ class Admin(Geographe, DataScientist):
         with open("user.json", "w") as write_file:
             json.dump(users, write_file)
 
-    def  gestion_comptes(self,content): 
+    def  gestion_comptes(self,previous_menu): 
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
-            return(Ouvert(content))
+            return(Ouvert(previous_menu))
         print("#### Gestion des comptes ####")
         choix = input("Voulez vous ajouter ou supprimer un compte ? : (A/S) ")
         if choix in ["a", "A"]: 
             self.ajout_compte()
-            return(Ouvert(content)) # à finir
+            return(Ouvert(previous_menu)) # à finir
         elif  choix in ["s", "S"]: 
             self.suppression_compte()
-            return(Ouvert(content)) # à finir
+            return(Ouvert(previous_menu)) # à finir
         else :
             print("Aucun changement effectué")
             input("Appuyez sur n'importe quelle touche pour continuer")
-            return(Ouvert(content))
+            return(Ouvert(previous_menu))
