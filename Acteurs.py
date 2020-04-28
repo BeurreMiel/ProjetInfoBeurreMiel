@@ -28,7 +28,7 @@ class Individu:
         """        
 
         check = input("Voulez vous quitter ? (Y/N) ")
-        if check in ["Y","Y"] : 
+        if check in ["Y","y"] : 
             return Ferme()
         else : 
             return Ouvert(previous_menu)
@@ -49,36 +49,12 @@ class Individu:
         with open(filename) as json_file:
             data = json.load(json_file)
          
-        #Affichage du pays
-        if is_number(nom_ou_code_pays) is False :
-    
-            code = ''
-    
-            for code_pays in range(len(data)) :
-    
-                if data[code_pays].get('Government') :
-                    if data[code_pays]['Government'].get('Country name') :
-                        if data[code_pays]['Government']['Country name'].get('conventional long form') :
-                            if data[code_pays]['Government']['Country name']['conventional long form']['text'] == nom_ou_code_pays :
-                                code = code_pays
-                        if data[code_pays]['Government']['Country name'].get('conventional short form') :
-                            if data[code_pays]['Government']['Country name']['conventional short form']['text'] == nom_ou_code_pays :
-                                code = code_pays
-                        if data[code_pays]['Government']['Country name'].get('local long form') :
-                            if data[code_pays]['Government']['Country name']['local long form']['text'] == nom_ou_code_pays :
-                                code = code_pays
-                        if data[code_pays]['Government']['Country name'].get('local short form') :
-                            if data[code_pays]['Government']['Country name']['local short form']['text'] == nom_ou_code_pays :
-                                code = code_pays
-    
-            if code == '' :
-                raise NameError('Pays introuvable')
-            else :
-                nom_ou_code_pays = code
-    
-        print("Code du pays sélectionné : ",nom_ou_code_pays)
-        nom_ou_code_pays = int(nom_ou_code_pays)
+        try : 
+            nom_ou_code_pays = int(nom_ou_code_pays)
+        except : nom_ou_code_pays = get_code(nom_ou_code_pays)
 
+        print("Code du pays sélectionné : ",nom_ou_code_pays,"\n")
+        nom_ou_code_pays = int(nom_ou_code_pays)
         inf1 = data[nom_ou_code_pays]['Government']['Country name']['conventional short form']['text']
         inf2 = data[nom_ou_code_pays]['Geography']['Area']['total']['text']
         inf3 = data[nom_ou_code_pays]['People and Society']['Population']['text']
@@ -216,94 +192,106 @@ class Geographe(Individu):
     def ajout_pays(self,previous): 
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
-            return("Normalement on doit revenir au menu précédent")
+            input( "Appuyez sur Entrer pour continuer")
+            return(Ouvert(previous))
 
         filename="country.json"
         with open(filename) as json_file:
             data = json.load(json_file)
 
-
+        nouveau_pays = True
+        
         while True : 
             Nom = input("Entrer le nom du pays a ajouter : ") 
             #on suppose dans un premier temps que l'user rentre quelque chose 
             if Nom != 'none':
                 break
         
-        # La fonction demande à l'utilisateur s'il souhaite ajouter des informations
-        complementaire = input('Voulez vous ajouter des informations ? (Y/N)')
-        # Si l'utilisateur accepte 
-        if complementaire in ["Y","y"]: 
+        try : #tente de trouver le code du pays
+            code = get_code(Nom)
+            nouveau_pays = False 
+            print("Le pays ",Nom," va être modifié")
+        except: 
+            print("Le pays entré n'existe pas, un nouveau pays va être crée")
+        finally :
+            # La fonction demande à l'utilisateur s'il souhaite ajouter des informations
+            complementaire = input('Voulez vous ajouter des informations ? (Y/N)')
             liste_info = []
-            superficie = input('Entrez la superficie du pays en km2, tapez None pour passer la question :')
-            liste_info.append(superficie)
-            pop = input('Entrez la population du pays en million d\'individus , tapez None pour passer la question :')
-            liste_info.append(pop)
-            crois = input('Entrez la croissance demographique du pays en pourcentage , tapez None pour passer la question :')
-            liste_info.append(crois)
-            inflation = input('Entrez l\'inflation du pays en pourcetage, tapez None pour passer la question :')
-            liste_info.append(inflation)
-            dette = input('Entrez la dette du pays en million de dollars, tapez None pour passer la question :')
-            liste_info.append(dette)
-            chom = input('Entrez la taux de chomage du pays en pourcentage, tapez None pour passer la question :')
-            liste_info.append(chom)
-            sante = input('Entrez le taux de depense en sante du pays en pourcentage, tapez None pour passer la question :')
-            liste_info.append(sante)
-            edu = input('Entrez le taux de depense en education du pays en pourcentage, tapez None pour passer la question :')
-            liste_info.append(edu)
-            army = input('Entrez le taux de depense militaire du pays en pourcentage, tapez None pour passer la question :')
-            liste_info.append(army)
+            # Si l'utilisateur accepte 
+            if complementaire in ["Y","y"]: 
+                superficie = input('Entrez la superficie du pays en km2, tapez None pour passer la question :')
+                liste_info.append(superficie)
+                pop = input('Entrez la population du pays en million d\'individus , tapez None pour passer la question :')
+                liste_info.append(pop)
+                crois = input('Entrez la croissance demographique du pays en pourcentage , tapez None pour passer la question :')
+                liste_info.append(crois)
+                inflation = input('Entrez l\'inflation du pays en pourcetage, tapez None pour passer la question :')
+                liste_info.append(inflation)
+                dette = input('Entrez la dette du pays en million de dollars, tapez None pour passer la question :')
+                liste_info.append(dette)
+                chom = input('Entrez la taux de chomage du pays en pourcentage, tapez None pour passer la question :')
+                liste_info.append(chom)
+                sante = input('Entrez le taux de depense en sante du pays en pourcentage, tapez None pour passer la question :')
+                liste_info.append(sante)
+                edu = input('Entrez le taux de depense en education du pays en pourcentage, tapez None pour passer la question :')
+                liste_info.append(edu)
+                army = input('Entrez le taux de depense militaire du pays en pourcentage, tapez None pour passer la question :')
+                liste_info.append(army)
 
-            # Entree des 5 classes d\'age
-            age1 = input('Entrez le pourcentage de la classe 1, tapez None pour passer la question :')
-            liste_info.append(age1)
-            age2 = input('Entrez le pourcentage de la classe 2, tapez None pour passer la question :')
-            liste_info.append(age2)
-            age3 = input('Entrez le pourcentage de la classe 3, tapez None pour passer la question :')
-            liste_info.append(age3)
-            age4 = input('Entrez le pourcentage de la classe 4, tapez None pour passer la question :')
-            liste_info.append(age4)
-            age5 = input('Entrez le pourcentage de la classe 5, tapez None pour passer la question :')
-            liste_info.append(age5)
+                # Entree des 5 classes d\'age
+                age1 = input('Entrez le pourcentage de la classe 1, tapez None pour passer la question :')
+                liste_info.append(age1)
+                age2 = input('Entrez le pourcentage de la classe 2, tapez None pour passer la question :')
+                liste_info.append(age2)
+                age3 = input('Entrez le pourcentage de la classe 3, tapez None pour passer la question :')
+                liste_info.append(age3)
+                age4 = input('Entrez le pourcentage de la classe 4, tapez None pour passer la question :')
+                liste_info.append(age4)
+                age5 = input('Entrez le pourcentage de la classe 5, tapez None pour passer la question :')
+                liste_info.append(age5)
 
-        # Creation de l'entree
-        entree = pays_vide()
-        entree['Government']['Country name']['conventional short form']['text'] = Nom
-        print("Votre pays a bien ete cree")
-        if len(liste_info) >0 : 
-            if liste_info[0] not in ['None','none']: 
-                entree['Geography']['Area']['total']['text'] = liste_info[0]
-            if liste_info[1] not in ['None','none']: 
-                entree['People and Society']['Population']['text'] = liste_info[1]
-            if liste_info[2] not in ['None','none']: 
-                entree['People and Society']['Population growth rate']['text'] = liste_info[2]
-            if liste_info[3] not in ['None','none']: 
-                entree['Economy']['Inflation rate (consumer prices)']['text'] = liste_info[3]
-            if liste_info[4] not in ['None','none']: 
-                entree['Economy']['Debt - external']['text'] = liste_info[4]
-            if liste_info[5] not in ['None','none']: 
-                entree['Economy']['Unemployment rate']['text'] = liste_info[5]
-            if liste_info[6] not in ['None','none']: 
-                entree['People and Society']['Health expenditures']['text'] = liste_info[6]
-            if liste_info[7] not in ['None','none']: 
-                entree['People and Society']['Education expenditures']['text'] = liste_info[7]
-            if liste_info[8] not in ['None','none']: 
-                entree['Military and Security']['Military expenditures']['text'] = liste_info[8]
-            if liste_info[9] not in ['None','none']: 
-                entree['People and Society']['Age structure']['0-14 years']['text'] = liste_info[9]
-            if liste_info[10] not in ['None','none']: 
-                entree['People and Society']['Age structure']['15-24 years']['text'] = liste_info[10]
-            if liste_info[11] not in ['None','none']: 
-                entree['People and Society']['Age structure']['25-54 years']['text'] = liste_info[11]
-            if liste_info[12] not in ['None','none']: 
-                entree['People and Society']['Age structure']['55-64 years']['text'] = liste_info[12]
-            if liste_info[13] not in ['None','none']: 
-                entree['People and Society']['Age structure']['65 years and over']['text'] = liste_info[13]
-            print('Vos informations complementaires ont bien ete enregistrees')
-        with open("country.json") as json_file: 
-            data =json.load(json_file)
-        data.append(entree)
-        with open("country.json", "w") as write_file:
-            json.dump(data, write_file)
+            # Creation de l'entree
+            entree = pays_vide()
+            entree['Government']['Country name']['conventional short form']['text'] = Nom
+            print("Votre pays a bien ete cree")
+            if len(liste_info) >0 : 
+                if liste_info[0] not in ['None','none']: 
+                    entree['Geography']['Area']['total']['text'] = liste_info[0]
+                if liste_info[1] not in ['None','none']: 
+                    entree['People and Society']['Population']['text'] = liste_info[1]
+                if liste_info[2] not in ['None','none']: 
+                    entree['People and Society']['Population growth rate']['text'] = liste_info[2]
+                if liste_info[3] not in ['None','none']: 
+                    entree['Economy']['Inflation rate (consumer prices)']['text'] = liste_info[3]
+                if liste_info[4] not in ['None','none']: 
+                    entree['Economy']['Debt - external']['text'] = liste_info[4]
+                if liste_info[5] not in ['None','none']: 
+                    entree['Economy']['Unemployment rate']['text'] = liste_info[5]
+                if liste_info[6] not in ['None','none']: 
+                    entree['People and Society']['Health expenditures']['text'] = liste_info[6]
+                if liste_info[7] not in ['None','none']: 
+                    entree['People and Society']['Education expenditures']['text'] = liste_info[7]
+                if liste_info[8] not in ['None','none']: 
+                    entree['Military and Security']['Military expenditures']['text'] = liste_info[8]
+                if liste_info[9] not in ['None','none']: 
+                    entree['People and Society']['Age structure']['0-14 years']['text'] = liste_info[9]
+                if liste_info[10] not in ['None','none']: 
+                    entree['People and Society']['Age structure']['15-24 years']['text'] = liste_info[10]
+                if liste_info[11] not in ['None','none']: 
+                    entree['People and Society']['Age structure']['25-54 years']['text'] = liste_info[11]
+                if liste_info[12] not in ['None','none']: 
+                    entree['People and Society']['Age structure']['55-64 years']['text'] = liste_info[12]
+                if liste_info[13] not in ['None','none']: 
+                    entree['People and Society']['Age structure']['65 years and over']['text'] = liste_info[13]
+                print('Vos informations complementaires ont bien ete enregistrees')
+            with open("country.json") as json_file: 
+                data =json.load(json_file)
+            if nouveau_pays : 
+                data.append(entree)
+            else :
+                data[code]= entree 
+            with open("country.json", "w") as write_file:
+                json.dump(data, write_file)
 
         print("Votre ajout a bien été enregistrée")
 
@@ -312,6 +300,7 @@ class Geographe(Individu):
     def gestion_suggestion(self,previous):
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
+            input( "Appuyez sur Entrer pour continuer")
             return(Ouvert(previous))
 
         with open("Suggestions.json") as json_file: 
@@ -444,6 +433,7 @@ class DataScientist(Consultant):
     def representationgraphique(self,previous_menu,critere):
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
+            input( "Appuyez sur Entrer pour continuer")
             return(Ouvert(previous_menu))
 
         filename="country.json"
@@ -630,6 +620,7 @@ class Admin(Geographe, DataScientist):
     def suppression(self,previous_menu):
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
+            input( "Appuyez sur Entrer pour continuer")
             return(Ouvert(previous_menu))
 
         filename="country.json"
@@ -674,7 +665,7 @@ class Admin(Geographe, DataScientist):
             json.dump(data, write_file)
 
         print("Votre suppression a bien été enregistrée")
-
+        input("Appuyez sur Entrer pour continuer. ")
         return(Ouvert(previous_menu))
 
 
@@ -723,6 +714,7 @@ class Admin(Geographe, DataScientist):
     def  gestion_comptes(self,previous_menu): 
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
+            input("\n""Appuyez sur Entrer pour continuer ")
             return(Ouvert(previous_menu))
         print("#### Gestion des comptes ####")
         choix = input("Voulez vous ajouter ou supprimer un compte ? : (A/S) ")
@@ -734,5 +726,5 @@ class Admin(Geographe, DataScientist):
             return(Ouvert(previous_menu)) # à finir
         else :
             print("Aucun changement effectué")
-            input("Appuyez sur n'importe quelle touche pour continuer")
+            input("Appuyez sur Entrer pour continuer ")
             return(Ouvert(previous_menu))
