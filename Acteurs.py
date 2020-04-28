@@ -441,7 +441,7 @@ class DataScientist(Consultant):
         
         return("On doit revenir au menu précédent")
 
-    def representationgraphique(self,previous_menu):
+    def representationgraphique(self,previous_menu,critere):
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
             return(Ouvert(previous_menu))
@@ -450,10 +450,6 @@ class DataScientist(Consultant):
         with open(filename) as json_file:
             data = json.load(json_file)
 
-        # À faire sous forme de menu 
-
-        critere = input("Choisissez votre critère: ")
-        critere = int(critere)
         
         #Erreurs
         if critere<2 or critere>10 :

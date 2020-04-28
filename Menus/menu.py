@@ -24,6 +24,69 @@ def indices_actions(ind,indice_taches):
     menu_act["path"] = []
     return(Ouvert(menu_act))
 
+def menu_graph(previous_menu): 
+    menu_act = {}
+    menu_act["individu"] = previous_menu["individu"]
+    menu_act["question"] = "Selectionnez le critère"
+    menu_act["options"] = ["Superficie", #2
+        "Population", #3
+        "Croissance démographique", #4
+        "Inflation", #5
+        "Dette", #6
+        "Taux de chômage", #7
+        "Taux de dépenses en santé", #8
+        "Taux de dépenses en éducation", #9
+        "Taux de dépenses militaires", #10
+        "Retour au menu précédent", 
+        "Quitter l'application"]
+    menu_act["actions"] = [
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,2)),
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,3)),
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,4)), # 
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,5)),
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,6)),
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,7)),
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,8)),
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,9)),
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,10)),
+            (lambda previous_menu : Ouvert(menu[0])),
+            Individu().quitter]
+    menu_act["path"] = []
+    
+    return(Ouvert(menu_act))
+
+def menu_resume(previous_menu): 
+    menu_act = {}
+    menu_act["individu"] = menu_act["individu"] = previous_menu["individu"]
+    menu_act["question"] = "Selectionnez le critère"
+    menu_act["options"] = ["Superficie", #2
+        "Population", #3
+        "Croissance démographique", #4
+        "Inflation", #5
+        "Dette", #6
+        "Taux de chômage", #7
+        "Taux de dépenses en santé", #8
+        "Taux de dépenses en éducation", #9
+        "Taux de dépenses militaires", #10
+        "Retour au menu précédent", 
+        "Quitter l'application"]
+    menu_act["actions"] = [
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu,2)),
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu,3)),
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu,4)), # 
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu,5)),
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu,6)),
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu,7)),
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu,8)),
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu,9)),
+            (lambda previous_menu :previous_menu["individu"].resume(previous_menu,10)),
+            (lambda previous_menu : Ouvert(menu[0])),
+            Individu().quitter]
+    menu_act["path"] = []
+    
+    return(Ouvert(menu_act))
+
+
 menu = [
     # Menu de selection du type d'utilisateur 
     { 
@@ -38,34 +101,31 @@ menu = [
         "individu": Individu(),
         "path": []
     },
+
     # Menu de selection de l'action
 
     {
         "question" : "Que voulez vous faire ? ",
         "options" : ["Connexion", #0
         "Affichage de données pays", #1
-        "Représentation graphique", #2
-        "Résumés statistiques", #3
+        "Représentation graphique", #2 Data
+        "Résumés statistiques", #3 Data
         "Proposition suggestion", #4
         "Gestion des pays", #5
         "Gestion des suggestions", #6
         "Gestion des comptes", #7
         "Retour au menu précédent", #8
         "Quitter l'application"],#9
-        "actions" : [
-            connexion,
+        "actions" : [connexion,
             (lambda previous_menu :previous_menu["individu"].affichage(previous_menu)),
-            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu)),
-            (lambda previous_menu :previous_menu["individu"].resume(previous_menu)), # à faire 
+            menu_graph,
+            menu_resume, # à faire 
             (lambda previous_menu :previous_menu["individu"].ajout_suggestion(previous_menu)),
             (lambda previous_menu :previous_menu["individu"].ajout_pays(previous_menu)),
             (lambda previous_menu :previous_menu["individu"].gestion_suggestion(previous_menu)),
             (lambda previous_menu :previous_menu["individu"].gestion_comptes(previous_menu)),
             (lambda previous_menu : Ouvert(menu[0])),
-            Individu().quitter,
-            ],
+            Individu().quitter],
         "individu": Individu(),
         "path": []
-    }
-]
-
+    }]
