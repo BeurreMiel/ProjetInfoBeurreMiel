@@ -26,12 +26,17 @@ class Individu:
             [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
             [Ferme()] -- [Quitte l'application]
         """        
-
-        check = input("Voulez vous quitter ? (Y/N) ")
+        print("{:^63}\n".format("\nVoulez vous quitter cette application ? (Y/N)"))
+        check = input("Choix : ")
         if check in ["Y","y"] : 
             return Ferme()
         else : 
             return Ouvert(previous_menu)
+    def suppression(self,previous_menu): #Pour éviter les erreurs
+        if not self.type == "Administrateur": 
+            print ("Vous n'êtes pas Administrateur \n Accès refusé")
+            input( "Appuyez sur Entrer pour continuer ")
+            return(Ouvert(previous_menu))
 
     def affichage(self,previous_menu):
         """ Affichage d'un pays 
@@ -91,7 +96,7 @@ class Consultant(Individu):
         self.type="Consultant"
         
     def ajout_suggestion(self,previous_menu): 
-        """ Affichage d'un pays 
+        """ Ajout de suggestions
 
         Arguments:
             previous_menu {list} -- Menu précédent l'appel de la fonction
@@ -443,7 +448,8 @@ class DataScientist(Consultant):
         
         #Erreurs
         if critere<2 or critere>10 :
-            return('Critère inexistant')
+            print('Critère inexistant')
+            return(Ouvert(previous_menu))
             
         tranche1=[]
         tranche2=[]
@@ -620,7 +626,11 @@ class Admin(Geographe, DataScientist):
     def suppression(self,previous_menu):
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
-            input( "Appuyez sur Entrer pour continuer")
+            input( "Appuyez sur Entrer pour continuer ")
+            return(Ouvert(previous_menu))
+        elif not self.type == "Administrateur": 
+            print ("Vous n'êtes pas Administrateur \n Accès refusé")
+            input( "Appuyez sur Entrer pour continuer ")
             return(Ouvert(previous_menu))
 
         filename="country.json"
@@ -629,36 +639,10 @@ class Admin(Geographe, DataScientist):
 
         nom_ou_code_pays = input("Entrez le nom ou le code du pays : ")
 
-        if is_number(nom_ou_code_pays) is True :
-            if nom_ou_code_pays > len(data) :
-                raise NameError('Pays introuvable')
-    
-        if is_number(nom_ou_code_pays) is False :
-    
-            code = ''
-    
-            for code_pays in range(len(data)) :
-    
-                if data[code_pays].get('Government') :
-                    if data[code_pays]['Government'].get('Country name') :
-                        if data[code_pays]['Government']['Country name'].get('conventional long form') :
-                            if data[code_pays]['Government']['Country name']['conventional long form']['text'] == nom_ou_code_pays :
-                                code = code_pays
-                        if data[code_pays]['Government']['Country name'].get('conventional short form') :
-                            if data[code_pays]['Government']['Country name']['conventional short form']['text'] == nom_ou_code_pays :
-                                code = code_pays
-                        if data[code_pays]['Government']['Country name'].get('local long form') :
-                            if data[code_pays]['Government']['Country name']['local long form']['text'] == nom_ou_code_pays :
-                                code = code_pays
-                        if data[code_pays]['Government']['Country name'].get('local short form') :
-                            if data[code_pays]['Government']['Country name']['local short form']['text'] == nom_ou_code_pays :
-                                code = code_pays
-    
-            if code == '' :
-                raise NameError('Pays introuvable')
-            else :
-                nom_ou_code_pays = code
-        nom_ou_code_pays = int(nom_ou_code_pays)
+        try : 
+            nom_ou_code_pays = int(nom_ou_code_pays)
+        except : 
+            nom_ou_code_pays = get_code(nom_ou_code_pays)
 
         del data[nom_ou_code_pays]
         with open("country.json", "w") as write_file:

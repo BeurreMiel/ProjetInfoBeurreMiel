@@ -1,12 +1,12 @@
-  
-from Data import data
-from Data import users
-from Data import sugges
 import matplotlib.pyplot as plt
 import json
 import numpy
 import os
+with open("user.json") as json_file:
+    users = json.load(json_file)
 
+with open("Suggestions.json") as json_file: 
+    sugges =json.load(json_file)
 # Fonction permettant de vider la console 
 clear = lambda: os.system('cls') 
 
@@ -43,7 +43,6 @@ def pays_vide():
     entree['Geography'] = {}
     entree['Geography']['Area'] = {}
     entree['Geography']['Area']['total'] = {}
-    print ("Creation de pays vide terminee")
 
     return(entree)
 
@@ -72,7 +71,10 @@ def get_code(nom_pays):
 
     Raises:
         NameError: Le pays n'est pas dans la base
-    """    
+    """
+    with open("country.json") as json_file: 
+        data =json.load(json_file)    
+
     code = ''
     for code_pays in range(len(data)) :
         code = ''

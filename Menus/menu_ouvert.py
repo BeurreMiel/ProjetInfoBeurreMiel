@@ -24,7 +24,7 @@ class Ouvert: #Permet l'ouverture d'un menu
                 for section in self.previous_menu["path"][2:]:
                     chemin += " -> {}".format(section)
             print("{} : {}\n".format(chemin, self.previous_menu["question"]))
-        else : print("{}\n".format(self.previous_menu["question"]))
+        else : print("{:^63}\n".format(self.previous_menu["question"]))
         
         # Options et actions possibles 
         options = self.previous_menu["options"]
@@ -33,10 +33,11 @@ class Ouvert: #Permet l'ouverture d'un menu
         
         # Affichage des options
         for i, opt in enumerate(options):
-            print("[{}] {}".format(i+1, opt))
+            print("• {} [{}]".format(opt,i+1))
 
-        print ("Que voulez vous faire ? ")
-
+        print('\n{:^63}\n'.format('Saisissez votre choix \n'))
+        print("༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ ༼ つ ಥ_ಥ ༽つ \n")
+        
         while True : 
             choix = input("Choix : ")
             try : 

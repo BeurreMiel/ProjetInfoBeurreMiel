@@ -86,11 +86,26 @@ def menu_resume(previous_menu):
     
     return(Ouvert(menu_act))
 
+def gestion_pays(previous_menu):
+    menu_act = {}
+    menu_act["individu"] = menu_act["individu"] = previous_menu["individu"]
+    menu_act["question"] = "Que voulez vous faire ? "
+    menu_act["options"] = ["Ajouter/Modifier un pays",
+        "Supprimer un pays (Administrateur seulement) ", 
+        "Retour au menu précédent", 
+        "Quitter l'application"]
+    menu_act["actions"] = [
+            (lambda previous_menu :previous_menu["individu"].ajout_pays(previous_menu)),
+            (lambda previous_menu :previous_menu["individu"].suppression(previous_menu)),
+            (lambda previous_menu : Ouvert(menu[0])),
+            Individu().quitter]
+    menu_act["path"] = []
+    return(Ouvert(menu_act))
 
 menu = [
     # Menu de selection du type d'utilisateur 
     { 
-        "question" : "Selectionner votre type utilisateur",
+        "question" : "Selectionnez votre type utilisateur",
         "options" : ["Consultant", "Géographe", "DataScientist", "Administrateur", "Quitter l'application"],
         "actions" : [
             (lambda previous_menu :indices_actions(Consultant(),[1,4,8,9])),
@@ -121,7 +136,7 @@ menu = [
             menu_graph,
             menu_resume, # à faire 
             (lambda previous_menu :previous_menu["individu"].ajout_suggestion(previous_menu)),
-            (lambda previous_menu :previous_menu["individu"].ajout_pays(previous_menu)),
+            gestion_pays,
             (lambda previous_menu :previous_menu["individu"].gestion_suggestion(previous_menu)),
             (lambda previous_menu :previous_menu["individu"].gestion_comptes(previous_menu)),
             (lambda previous_menu : Ouvert(menu[0])),

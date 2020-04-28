@@ -15,7 +15,7 @@ class Main_menu:
         welcome = Figlet(font='big')
         print(welcome.renderText('Bienvenue'))
         input("Appuyez sur Entrer pour lancer l'application : ")
-
+        
     def Banner(self): 
         """[Non utilisée]
         """        
