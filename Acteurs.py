@@ -108,36 +108,72 @@ class Consultant(Individu):
         liste_info = []
         Nom = input("Entrer le nom du pays de la suggestion : ") 
         liste_info.append(Nom)
-        superficie = input('Entrez la superficie du pays en km2, tapez None pour passer la question :')
+        superficie = input('Entrez la superficie du pays en km2 totale, tapez None pour passer la question :')
         liste_info.append(superficie)
-        pop = input('Entrez la population du pays en million d\'individus , tapez None pour passer la question :')
+        superficie2 = input('Entrez la superficie du pays en km2 métropolitaine, tapez None pour passer la question :')
+        liste_info.append(superficie2)
+        pop = input('Entrez la population du pays, tapez None pour passer la question :')
         liste_info.append(pop)
         crois = input('Entrez la croissance demographique du pays en pourcentage , tapez None pour passer la question :')
         liste_info.append(crois)
-        inflation = input('Entrez l\'inflation du pays en pourcetage, tapez None pour passer la question :')
+        inflation = input('Entrez l\'inflation du pays en pourcetage pour l\'année 2016, tapez None pour passer la question :')
         liste_info.append(inflation)
-        dette = input('Entrez la dette du pays en million de dollars, tapez None pour passer la question :')
+        inflation2 = input('Entrez l\'inflation du pays en pourcetage pour l\'année 2015, tapez None pour passer la question :')
+        liste_info.append(inflation2)
+        dette = input('Entrez la dette en dollars - unité incluse (trillion, billion...) - pour l\'année 2016, tapez None pour passer la question :')
         liste_info.append(dette)
-        chom = input('Entrez la taux de chomage du pays en pourcentage, tapez None pour passer la question :')
+        dette2 = input('Entrez la dette en dollars - unité incluse (trillion, billion...) - pour l\'année 2016, tapez None pour passer la question :')
+        liste_info.append(dette2)
+        chom = input('Entrez la taux de chomage du pays en pourcentage pour l\'année 2015, tapez None pour passer la question :')
         liste_info.append(chom)
-        sante = input('Entrez le taux de depense en sante du pays en pourcentage, tapez None pour passer la question :')
+        chom2 = input('Entrez la taux de chomage du pays en pourcentage pour l\'année 2016, tapez None pour passer la question :')
+        liste_info.append(chom2)
+        sante = input('Entrez le taux de depense en sante du pays en pourcentage pour l\'année 2014, tapez None pour passer la question :')
         liste_info.append(sante)
-        edu = input('Entrez le taux de depense en education du pays en pourcentage, tapez None pour passer la question :')
+        edu = input('Entrez le taux de depense en education du pays en pourcentage pour l\'année 2013, tapez None pour passer la question :')
         liste_info.append(edu)
-        army = input('Entrez le taux de depense militaire du pays en pourcentage, tapez None pour passer la question :')
+        army = input('Entrez le taux de depense militaire du pays en pourcentage pour 2014, tapez None pour passer la question :')
         liste_info.append(army)
-    
+        army2 = input('Entrez le taux de depense militaire du pays en pourcentage pour 2013, tapez None pour passer la question :')
+        liste_info.append(army2)
+        army3 = input('Entrez le taux de depense militaire du pays en pourcentage pour 2012, tapez None pour passer la question :')
+        liste_info.append(army3)
+
         # Entree des 5 classes d\'age
-        age1 = input('Entrez le pourcentage de la classe 1, tapez None pour passer la question : ')
+        age1 = input('Entrez le pourcentage de la classe [0-14] ans total, tapez None pour passer la question :')
         liste_info.append(age1)
-        age2 = input('Entrez le pourcentage de la classe 2, tapez None pour passer la question : ')
+        age1_1 = input('Entrez le pourcentage de la classe [0-14] ans masculin, tapez None pour passer la question :')
+        liste_info.append(age1_1)
+        age1_2 = input('Entrez le pourcentage de la classe [0-14] ans feminin, tapez None pour passer la question :')
+        liste_info.append(age1_2)
+
+        age2 = input('Entrez le pourcentage de la classe [0-14] ans total, tapez None pour passer la question :')
         liste_info.append(age2)
-        age3 = input('Entrez le pourcentage de la classe 3, tapez None pour passer la question : ')
+        age2_1 = input('Entrez le pourcentage de la classe [0-14] ans masculin, tapez None pour passer la question :')
+        liste_info.append(age2_1)
+        age2_2 = input('Entrez le pourcentage de la classe [0-14] ans feminin, tapez None pour passer la question :')
+        liste_info.append(age2_2)
+
+        age3 = input('Entrez le pourcentage de la classe [25-54] ans total, tapez None pour passer la question :')
         liste_info.append(age3)
-        age4 = input('Entrez le pourcentage de la classe 4, tapez None pour passer la question : ')
+        age3_1 = input('Entrez le pourcentage de la classe [25-54] ans masculin, tapez None pour passer la question :')
+        liste_info.append(age3_1)
+        age3_2 = input('Entrez le pourcentage de la classe [25-54] ans feminin, tapez None pour passer la question :')
+        liste_info.append(age3_2)
+
+        age4 = input('Entrez le pourcentage de la classe [55-64] ans total, tapez None pour passer la question :')
         liste_info.append(age4)
-        age5 = input('Entrez le pourcentage de la classe 5, tapez None pour passer la question : ')
+        age4_1 = input('Entrez le pourcentage de la classe [55-64] ans masculin, tapez None pour passer la question :')
+        liste_info.append(age4_1)
+        age4_2 = input('Entrez le pourcentage de la classe [55-64] ans feminin, tapez None pour passer la question :')
+        liste_info.append(age4_2)
+
+        age5 = input('Entrez le pourcentage de la classe [65 ans et plus] total, tapez None pour passer la question :')
         liste_info.append(age5)
+        age5_1 = input('Entrez le pourcentage de la classe [65 ans et plus] masculin, tapez None pour passer la question :')
+        liste_info.append(age5_1)
+        age5_2 = input('Entrez le pourcentage de la classe [65 ans et plus] feminin, tapez None pour passer la question :')
+        liste_info.append(age5_2)
 
         # Ajout de la suggestion dans la base de données
         with open("Suggestions.json") as json_file: 
@@ -224,36 +260,72 @@ class Geographe(Individu):
             liste_info = []
             # Si l'utilisateur accepte 
             if complementaire in ["Y","y"]: 
-                superficie = input('Entrez la superficie du pays en km2, tapez None pour passer la question :')
+                superficie = input('Entrez la superficie du pays en km2 totale, tapez None pour passer la question :')
                 liste_info.append(superficie)
-                pop = input('Entrez la population du pays en million d\'individus , tapez None pour passer la question :')
+                superficie2 = input('Entrez la superficie du pays en km2 métropolitaine, tapez None pour passer la question :')
+                liste_info.append(superficie2)
+                pop = input('Entrez la population du pays, tapez None pour passer la question :')
                 liste_info.append(pop)
                 crois = input('Entrez la croissance demographique du pays en pourcentage , tapez None pour passer la question :')
                 liste_info.append(crois)
-                inflation = input('Entrez l\'inflation du pays en pourcetage, tapez None pour passer la question :')
+                inflation = input('Entrez l\'inflation du pays en pourcetage pour l\'année 2016, tapez None pour passer la question :')
                 liste_info.append(inflation)
-                dette = input('Entrez la dette du pays en million de dollars, tapez None pour passer la question :')
+                inflation2 = input('Entrez l\'inflation du pays en pourcetage pour l\'année 2015, tapez None pour passer la question :')
+                liste_info.append(inflation2)
+                dette = input('Entrez la dette en dollars - unité incluse (trillion, billion...) - pour l\'année 2016, tapez None pour passer la question :')
                 liste_info.append(dette)
-                chom = input('Entrez la taux de chomage du pays en pourcentage, tapez None pour passer la question :')
+                dette2 = input('Entrez la dette en dollars - unité incluse (trillion, billion...) - pour l\'année 2016, tapez None pour passer la question :')
+                liste_info.append(dette2)
+                chom = input('Entrez la taux de chomage du pays en pourcentage pour l\'année 2015, tapez None pour passer la question :')
                 liste_info.append(chom)
-                sante = input('Entrez le taux de depense en sante du pays en pourcentage, tapez None pour passer la question :')
+                chom2 = input('Entrez la taux de chomage du pays en pourcentage pour l\'année 2016, tapez None pour passer la question :')
+                liste_info.append(chom2)
+                sante = input('Entrez le taux de depense en sante du pays en pourcentage pour l\'année 2014, tapez None pour passer la question :')
                 liste_info.append(sante)
-                edu = input('Entrez le taux de depense en education du pays en pourcentage, tapez None pour passer la question :')
+                edu = input('Entrez le taux de depense en education du pays en pourcentage pour l\'année 2013, tapez None pour passer la question :')
                 liste_info.append(edu)
-                army = input('Entrez le taux de depense militaire du pays en pourcentage, tapez None pour passer la question :')
+                army = input('Entrez le taux de depense militaire du pays en pourcentage pour 2014, tapez None pour passer la question :')
                 liste_info.append(army)
+                army2 = input('Entrez le taux de depense militaire du pays en pourcentage pour 2013, tapez None pour passer la question :')
+                liste_info.append(army2)
+                army3 = input('Entrez le taux de depense militaire du pays en pourcentage pour 2012, tapez None pour passer la question :')
+                liste_info.append(army3)
 
                 # Entree des 5 classes d\'age
-                age1 = input('Entrez le pourcentage de la classe 1, tapez None pour passer la question :')
+                age1 = input('Entrez le pourcentage de la classe [0-14] ans total, tapez None pour passer la question :')
                 liste_info.append(age1)
-                age2 = input('Entrez le pourcentage de la classe 2, tapez None pour passer la question :')
+                age1_1 = input('Entrez le pourcentage de la classe [0-14] ans masculin, tapez None pour passer la question :')
+                liste_info.append(age1_1)
+                age1_2 = input('Entrez le pourcentage de la classe [0-14] ans feminin, tapez None pour passer la question :')
+                liste_info.append(age1_2)
+
+                age2 = input('Entrez le pourcentage de la classe [0-14] ans total, tapez None pour passer la question :')
                 liste_info.append(age2)
-                age3 = input('Entrez le pourcentage de la classe 3, tapez None pour passer la question :')
+                age2_1 = input('Entrez le pourcentage de la classe [0-14] ans masculin, tapez None pour passer la question :')
+                liste_info.append(age2_1)
+                age2_2 = input('Entrez le pourcentage de la classe [0-14] ans feminin, tapez None pour passer la question :')
+                liste_info.append(age2_2)
+
+                age3 = input('Entrez le pourcentage de la classe [25-54] ans total, tapez None pour passer la question :')
                 liste_info.append(age3)
-                age4 = input('Entrez le pourcentage de la classe 4, tapez None pour passer la question :')
+                age3_1 = input('Entrez le pourcentage de la classe [25-54] ans masculin, tapez None pour passer la question :')
+                liste_info.append(age3_1)
+                age3_2 = input('Entrez le pourcentage de la classe [25-54] ans feminin, tapez None pour passer la question :')
+                liste_info.append(age3_2)
+
+                age4 = input('Entrez le pourcentage de la classe [55-64] ans total, tapez None pour passer la question :')
                 liste_info.append(age4)
-                age5 = input('Entrez le pourcentage de la classe 5, tapez None pour passer la question :')
+                age4_1 = input('Entrez le pourcentage de la classe [55-64] ans masculin, tapez None pour passer la question :')
+                liste_info.append(age4_1)
+                age4_2 = input('Entrez le pourcentage de la classe [55-64] ans feminin, tapez None pour passer la question :')
+                liste_info.append(age4_2)
+
+                age5 = input('Entrez le pourcentage de la classe [65 ans et plus] total, tapez None pour passer la question :')
                 liste_info.append(age5)
+                age5_1 = input('Entrez le pourcentage de la classe [65 ans et plus] masculin, tapez None pour passer la question :')
+                liste_info.append(age5_1)
+                age5_2 = input('Entrez le pourcentage de la classe [65 ans et plus] feminin, tapez None pour passer la question :')
+                liste_info.append(age5_2)
 
             # Creation de l'entree
             entree = pays_vide()
@@ -261,33 +333,33 @@ class Geographe(Individu):
             print("Votre pays a bien ete cree")
             if len(liste_info) >0 : 
                 if liste_info[0] not in ['None','none']: 
-                    entree['Geography']['Area']['total']['text'] = liste_info[0]
+                    entree['Geography']['Area']['total']['text'] = str(liste_info[0])+"sq km; "+str(liste_info[1])+" sq km (metropolitan "+ Nom +")"
                 if liste_info[1] not in ['None','none']: 
-                    entree['People and Society']['Population']['text'] = liste_info[1]
+                    entree['People and Society']['Population']['text'] = liste_info[2]
                 if liste_info[2] not in ['None','none']: 
-                    entree['People and Society']['Population growth rate']['text'] = liste_info[2]
+                    entree['People and Society']['Population growth rate']['text'] = str(liste_info[3])+"% (2016 est.)"
                 if liste_info[3] not in ['None','none']: 
-                    entree['Economy']['Inflation rate (consumer prices)']['text'] = liste_info[3]
+                    entree['Economy']['Inflation rate (consumer prices)']['text'] = str(liste_info[4])+"% (2016 est.) ++ "+str(liste_info[5])+"% (2015 est.)"
                 if liste_info[4] not in ['None','none']: 
-                    entree['Economy']['Debt - external']['text'] = liste_info[4]
+                    entree['Economy']['Debt - external']['text'] = "$"+str(liste_info[6])+"% (31 March 2016 est.) ++ $"+str(liste_info[7])+"% (31 March 2015 est.)"
                 if liste_info[5] not in ['None','none']: 
-                    entree['Economy']['Unemployment rate']['text'] = liste_info[5]
+                    entree['Economy']['Unemployment rate']['text'] = str(liste_info[8])+"% (2016 est.) ++ "+str(liste_info[9])+"% (2015 est.)"
                 if liste_info[6] not in ['None','none']: 
-                    entree['People and Society']['Health expenditures']['text'] = liste_info[6]
+                    entree['People and Society']['Health expenditures']['text'] = str(liste_info[10])+ "% of GDP (2014)"
                 if liste_info[7] not in ['None','none']: 
-                    entree['People and Society']['Education expenditures']['text'] = liste_info[7]
+                    entree['People and Society']['Education expenditures']['text'] = str(liste_info[11])+ "% of GDP (2013)"
                 if liste_info[8] not in ['None','none']: 
-                    entree['Military and Security']['Military expenditures']['text'] = liste_info[8]
+                    entree['Military and Security']['Military expenditures']['text'] = str(liste_info[12])+"% of GDP (2014) ++ "+str(liste_info[12])+"% of GDP (2013) ++ "+str(liste_info[13])+"% of GDP (2012)"
                 if liste_info[9] not in ['None','none']: 
-                    entree['People and Society']['Age structure']['0-14 years']['text'] = liste_info[9]
+                    entree['People and Society']['Age structure']['0-14 years']['text'] = str(liste_info[14])+"% (male "+str(liste_info[15])+"% / female "+str(liste_info[16])+")"
                 if liste_info[10] not in ['None','none']: 
-                    entree['People and Society']['Age structure']['15-24 years']['text'] = liste_info[10]
+                    entree['People and Society']['Age structure']['15-24 years']['text'] = str(liste_info[17])+"% (male "+str(liste_info[18])+"% / female "+str(liste_info[19])+")"
                 if liste_info[11] not in ['None','none']: 
-                    entree['People and Society']['Age structure']['25-54 years']['text'] = liste_info[11]
+                    entree['People and Society']['Age structure']['25-54 years']['text'] = str(liste_info[10])+"% (male "+str(liste_info[21])+"% / female "+str(liste_info[22])+")"
                 if liste_info[12] not in ['None','none']: 
-                    entree['People and Society']['Age structure']['55-64 years']['text'] = liste_info[12]
+                    entree['People and Society']['Age structure']['55-64 years']['text'] = str(liste_info[23])+"% (male "+str(liste_info[24])+"% / female "+str(liste_info[25])+")"
                 if liste_info[13] not in ['None','none']: 
-                    entree['People and Society']['Age structure']['65 years and over']['text'] = liste_info[13]
+                    entree['People and Society']['Age structure']['65 years and over']['text'] = str(liste_info[26])+"% (male "+str(liste_info[27])+"% / female "+str(liste_info[28])+")"
                 print('Vos informations complementaires ont bien ete enregistrees')
             with open("country.json") as json_file: 
                 data =json.load(json_file)
@@ -317,23 +389,25 @@ class Geographe(Individu):
 
         n = len(sugges)
         while n > 0 :
+            liste_info= sugges[0]
+            nom_pays = liste_info.pop(0) # Recupere le nom du pays pour le placer correctement
             print("#####################################################")
             print("Voici la suggestion : ") 
-            print("Nom du pays : ", sugges[0][0])
-            print("Superficie du pays : ", sugges[0][1])
-            print("Population du pays : ", sugges[0][2])
-            print("Croissance démographique du pays : ", sugges[0][3])
-            print("Inflation du pays : ", sugges[0][4])
-            print("Dette du pays : ", sugges[0][5])
-            print("Taux de chômage du pays : ", sugges[0][6])
-            print("Depense sante du pays : ", sugges[0][7])
-            print("Depense education du pays : ", sugges[0][8])
-            print("Depense militaire du pays : ", sugges[0][9])
-            print("Taux age1 : ", sugges[0][10])
-            print("Taux age2 : ", sugges[0][11])
-            print("Taux age3 : ", sugges[0][12])
-            print("Taux age4 : ", sugges[0][13])
-            print("Taux age5 : ", sugges[0][14])
+            print("Nom du pays : ", nom_pays)
+            print("Superficie du pays : ", str(liste_info[0])+"sq km; "+str(liste_info[1])+" sq km (metropolitan "+ nom_pays +")")
+            print("Population du pays : ", liste_info[2])
+            print("Croissance démographique du pays : ", str(liste_info[3])+"% (2016 est.)")
+            print("Inflation du pays : ", str(liste_info[4])+"% (2016 est.) ++ "+str(liste_info[5])+"% (2015 est.)")
+            print("Dette du pays : ", "$"+str(liste_info[6])+"% (31 March 2016 est.) ++ $"+str(liste_info[7])+"% (31 March 2015 est.)")
+            print("Taux de chômage du pays : ", str(liste_info[8])+"% (2016 est.) ++ "+str(liste_info[9])+"% (2015 est.)")
+            print("Depense santé du pays : ", str(liste_info[10])+ "% of GDP (2014)")
+            print("Depense education du pays : ", str(liste_info[11])+ "% of GDP (2013)")
+            print("Depense militaire du pays : ",str(liste_info[12])+"% of GDP (2014) ++ "+str(liste_info[12])+"% of GDP (2013) ++ "+str(liste_info[13])+"% of GDP (2012)")
+            print("Taux [0 - 14] ans  : ", str(liste_info[14])+"% (male "+str(liste_info[15])+"% / female "+str(liste_info[16])+")")
+            print("Taux [15 - 24] ans : ", str(liste_info[17])+"% (male "+str(liste_info[18])+"% / female "+str(liste_info[19])+")")
+            print("Taux [25 - 54] ans : ", str(liste_info[10])+"% (male "+str(liste_info[21])+"% / female "+str(liste_info[22])+")")
+            print("Taux [55 - 64] ans : ", str(liste_info[23])+"% (male "+str(liste_info[24])+"% / female "+str(liste_info[25])+")")
+            print("Taux [65 ans et plus] ", sugges[0][14])
             print("#####################################################")
             while True : 
                 res = input("Vous pouvez accepter (A) ou rejeter (R) cette suggestion : ")
@@ -341,40 +415,40 @@ class Geographe(Individu):
                     break 
             
             if res in ["A","a"] : # Si l'admin accepte la suggestion 
-                liste_info= sugges[0]
-                nom_pays = liste_info.pop(0) # Recupere le nom du pays pour le placer correctement
+                
+                
                 print ("Le pays ",nom_pays, "va être modifié :")
                 nom_pays = get_code(nom_pays)
                 # Test de présence du pays
                 if len(liste_info) >0 : 
                     if liste_info[0] not in ['None','none']: 
-                        data[nom_pays]['Geography']['Area']['total']['text'] = liste_info[0]
+                        data[nom_pays]['Geography']['Area']['total']['text'] = str(liste_info[0])+"sq km; "+str(liste_info[1])+" sq km (metropolitan "+ nom_pays +")"
                     if liste_info[1] not in ['None','none']: 
-                        data[nom_pays]['People and Society']['Population']['text'] = liste_info[1]
+                        data[nom_pays]['People and Society']['Population']['text'] = liste_info[2]
                     if liste_info[2] not in ['None','none']: 
-                        data[nom_pays]['People and Society']['Population growth rate']['text'] = liste_info[2]
+                        data[nom_pays]['People and Society']['Population growth rate']['text'] = str(liste_info[3])+"% (2016 est.)"
                     if liste_info[3] not in ['None','none']: 
-                        data[nom_pays]['Economy']['Inflation rate (consumer prices)']['text'] = liste_info[3]
+                        data[nom_pays]['Economy']['Inflation rate (consumer prices)']['text'] = str(liste_info[4])+"% (2016 est.) ++ "+str(liste_info[5])+"% (2015 est.)"
                     if liste_info[4] not in ['None','none']: 
-                        data[nom_pays]['Economy']['Debt - external']['text'] = liste_info[4]
+                        data[nom_pays]['Economy']['Debt - external']['text'] = "$"+str(liste_info[6])+"% (31 March 2016 est.) ++ $"+str(liste_info[7])+"% (31 March 2015 est.)"
                     if liste_info[5] not in ['None','none']: 
-                        data[nom_pays]['Economy']['Unemployment rate']['text'] = liste_info[5]
+                        data[nom_pays]['Economy']['Unemployment rate']['text'] = str(liste_info[8])+"% (2016 est.) ++ "+str(liste_info[9])+"% (2015 est.)"
                     if liste_info[6] not in ['None','none']: 
-                        data[nom_pays]['People and Society']['Health expenditures']['text'] = liste_info[6]
+                        data[nom_pays]['People and Society']['Health expenditures']['text'] = str(liste_info[10])+ "% of GDP (2014)"
                     if liste_info[7] not in ['None','none']: 
-                        data[nom_pays]['People and Society']['Education expenditures']['text'] = liste_info[7]
+                        data[nom_pays]['People and Society']['Education expenditures']['text'] = str(liste_info[11])+ "% of GDP (2013)"
                     if liste_info[8] not in ['None','none']: 
-                        data[nom_pays]['Military and Security']['Military expenditures']['text'] = liste_info[8]
+                        data[nom_pays]['Military and Security']['Military expenditures']['text'] = str(liste_info[12])+"% of GDP (2014) ++ "+str(liste_info[12])+"% of GDP (2013) ++ "+str(liste_info[13])+"% of GDP (2012)"
                     if liste_info[9] not in ['None','none']: 
-                        data[nom_pays]['People and Society']['Age structure']['0-14 years']['text'] = liste_info[9]
+                        data[nom_pays]['People and Society']['Age structure']['0-14 years']['text'] = str(liste_info[14])+"% (male "+str(liste_info[15])+"% / female "+str(liste_info[16])+")"
                     if liste_info[10] not in ['None','none']: 
-                        data[nom_pays]['People and Society']['Age structure']['15-24 years']['text'] = liste_info[10]
+                        data[nom_pays]['People and Society']['Age structure']['15-24 years']['text'] = str(liste_info[17])+"% (male "+str(liste_info[18])+"% / female "+str(liste_info[19])+")"
                     if liste_info[11] not in ['None','none']: 
-                        data[nom_pays]['People and Society']['Age structure']['25-54 years']['text'] = liste_info[11]
+                        data[nom_pays]['People and Society']['Age structure']['25-54 years']['text'] = str(liste_info[10])+"% (male "+str(liste_info[21])+"% / female "+str(liste_info[22])+")"
                     if liste_info[12] not in ['None','none']: 
-                        data[nom_pays]['People and Society']['Age structure']['55-64 years']['text'] = liste_info[12]
+                        data[nom_pays]['People and Society']['Age structure']['55-64 years']['text'] = str(liste_info[23])+"% (male "+str(liste_info[24])+"% / female "+str(liste_info[25])+")"
                     if liste_info[13] not in ['None','none']: 
-                        data[nom_pays]['People and Society']['Age structure']['65 years and over']['text'] = liste_info[13]
+                        data[nom_pays]['People and Society']['Age structure']['65 years and over']['text'] = str(liste_info[26])+"% (male "+str(liste_info[27])+"% / female "+str(liste_info[28])+")"
                     print('Vos informations complementaires ont bien ete enregistrees : ')
 
             
@@ -440,16 +514,10 @@ class DataScientist(Consultant):
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
             input( "Appuyez sur Entrer pour continuer")
             return(Ouvert(previous_menu))
-
+        
         filename="country.json"
         with open(filename) as json_file:
-            data = json.load(json_file)
-
-        
-        #Erreurs
-        if critere<2 or critere>10 :
-            print('Critère inexistant')
-            return(Ouvert(previous_menu))
+            data = json.load(json_file)     
             
         tranche1=[]
         tranche2=[]
@@ -457,17 +525,25 @@ class DataScientist(Consultant):
         tranche4=[]
         tranche5=[]
         crit=[]
-        pays=[]
+        pays=[]    
+
+            
+
+        
+        #Erreurs
+        if critere<2 or critere>10 :
+            print('Critère inexistant')
+            return(Ouvert(previous_menu))
+
 
         #Séparation des tranches d'âges
         for j in range (len(data)):
-            if data[j].get('People and Society'):
-                if data[j]['People and Society'].get('Age structure'):
-                    tranche1.append(data[j]['People and Society']['Age structure']['0-14 years']['text'])
-                    tranche2.append(data[j]['People and Society']['Age structure']['15-24 years']['text'])
-                    tranche3.append(data[j]['People and Society']['Age structure']['25-54 years']['text'])
-                    tranche4.append(data[j]['People and Society']['Age structure']['55-64 years']['text'])
-                    tranche5.append(data[j]['People and Society']['Age structure']['65 years and over']['text'])
+
+            tranche1.append(data[j]['People and Society']['Age structure']['0-14 years']['text'])
+            tranche2.append(data[j]['People and Society']['Age structure']['15-24 years']['text'])
+            tranche3.append(data[j]['People and Society']['Age structure']['25-54 years']['text'])
+            tranche4.append(data[j]['People and Society']['Age structure']['55-64 years']['text'])
+            tranche5.append(data[j]['People and Society']['Age structure']['65 years and over']['text'])
     
         #On garde les pourcentages
         TR1=[]
@@ -493,78 +569,51 @@ class DataScientist(Consultant):
             
             
         #Pour réaliser le diagramme en barres d’un certain critère  
-        for i in range (len(data)):
-            if critere==2:
-                if data[i].get('Geography') and data[i].get('Government'):
-                    if data[i]['Geography'].get('Area') and data[i]['Government'].get('Country name'):
-                        if data[i]['Geography']['Area'].get('total') and data[i]['Government']['Country name'].get('conventional short form'):
-                            
-                            crit.append(data[i]['Geography']['Area']['total']['text'])
-                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
-            elif critere==3:
-                if data[i].get('People and Society') and data[i].get('Government'):
-                    if data[i]['People and Society'].get('Population') and data[i]['Government'].get('Country name'):
-                        if data[i]['Government']['Country name'].get('conventional short form'):
-                            
-                                crit.append(data[i]['People and Society']['Population']['text'])
-                                pays.append(data[i]['Government']['Country name']['conventional short form']['text'])        
-            
-            elif critere==4:
-                if data[i].get('People and Society') and data[i].get('Government'):
-                    if data[i]['People and Society'].get('Population growth rate') and data[i]['Government'].get('Country name'):
-                        if data[i]['Government']['Country name'].get('conventional short form'):
-                            
-                            crit.append(data[i]['People and Society']['Population growth rate']['text'])
-                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
-            elif critere==5:
-                if data[i].get('Economy') and data[i].get('Government'):
-                    if data[i]['Economy'].get('Inflation rate (consumer prices)') and data[i]['Government'].get('Country name'):
-                        if data[i]['Government']['Country name'].get('conventional short form'):
-                            
-                            crit.append(data[i]['Economy']['Inflation rate (consumer prices)']['text'])
-                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
-            elif critere==6:
-             if data[i].get('Economy') and data[i].get('Government'):
-                if data[i]['Economy'].get('Debt - external') and data[i]['Government'].get('Country name'):
-                    if data[i]['Economy']['Debt - external'].get('text') and data[i]['Government']['Country name'].get('conventional short form'):
-
-                        crit.append(data[i]['Economy']['Debt - external']['text'])
+        
+            if critere==1:
+                    for i in range (len(data)):
+                        crit.append(data[i]['Geography']['Area']['total']['text'])
                         pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
             
-            elif critere==7:
-                if data[i].get('Economy') and data[i].get('Government'):
-                    if data[i]['Economy'].get('Unemployment rate') and data[i]['Government'].get('Country name'):
-                        if data[i]['Government']['Country name'].get('conventional short form'):
+            elif critere==2:
+                    for i in range (len(data)):
+                        crit.append(data[i]['People and Society']['Population']['text'])
+                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])        
                 
-                            crit.append(data[i]['Economy']['Unemployment rate']['text'])
-                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            elif critere==3:
+               for i in range (len(data)):
+                   crit.append(data[i]['People and Society']['Population growth rate']['text'])
+                   pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==4:
+                for i in range (len(data)):
+                    crit.append(data[i]['Economy']['Inflation rate (consumer prices)']['text'])
+                    pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==5:
+                for i in range (len(data)):
+                    crit.append(data[i]['Economy']['Debt - external']['text'])
+                    pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==6:
+                for i in range (len(data)):
+                    crit.append(data[i]['Economy']['Unemployment rate']['text'])
+                    pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+            
+            elif critere==7:
+                for i in range (len(data)):
+                    crit.append(data[i]['People and Society']['Health expenditures']['text'])
+                    pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
             
             elif critere==8:
-                if data[i].get('People and Society') and data[i].get('Government'):
-                    if data[i]['People and Society'].get('Health expenditures') and data[i]['Government'].get('Country name'):
-                        if data[i]['Government']['Country name'].get('conventional short form'):
-                
-                            crit.append(data[i]['People and Society']['Health expenditures']['text'])
-                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+               for i in range (len(data)):
+                   crit.append(data[i]['People and Society']['Education expenditures']['text'])
+                   pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
             
             elif critere==9:
-                if data[i].get('People and Society') and data[i].get('Government'):
-                    if data[i]['People and Society'].get('Education expenditures') and data[i]['Government'].get('Country name'):
-                        if data[i]['Government']['Country name'].get('conventional short form'):
-                
-                            crit.append(data[i]['People and Society']['Education expenditures']['text'])
-                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
-            elif critere==10:
-                if data[i].get('Military and Security') and data[i].get('Government'):
-                    if data[i]['Military and Security'].get('Military expenditures') and data[i]['Government'].get('Country name'):
-                        if data[i]['Government']['Country name'].get('conventional short form'):
-                
-                            crit.append(data[i]['Military and Security']['Military expenditures']['text']) 
-                            pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+               for i in range (len(data)):
+                   crit.append(data[i]['Military and Security']['Military expenditures']['text']) 
+                   pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
             
             #Diagramme en barre du critère
             plt.bar(pays,crit)
@@ -575,7 +624,7 @@ class DataScientist(Consultant):
             plt.boxplot([TR1,TR2,TR3,TR4,TR5])
             plt.title("Boxplot par tranche d'âge du critère") 
             plt.show()
-
+            
             input("Appuyez sur Entrer pour continuer")
             return(Ouvert(previous_menu))
 
