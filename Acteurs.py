@@ -1,7 +1,10 @@
+""" Module des acteurs de l'applications 
+"""
+
 import json
 import numpy
 import matplotlib.pyplot as plt
-from FonctionBD import *
+import FonctionBD as fbd
 from Menus.menu_ouvert import Ouvert
 from Menus.menu_ferme import Ferme
 import getpass
@@ -51,7 +54,7 @@ class Individu:
          
         try : 
             nom_ou_code_pays = int(nom_ou_code_pays)
-        except : nom_ou_code_pays = get_code(nom_ou_code_pays)
+        except : nom_ou_code_pays = fbd.get_code(nom_ou_code_pays)
 
         print("Code du pays sélectionné : ",nom_ou_code_pays,"\n")
         nom_ou_code_pays = int(nom_ou_code_pays)
@@ -191,9 +194,9 @@ class Geographe(Individu):
         with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
-        lcomptes = account_list(users)
-        lmdp = password_list(users)
-        ltype = type_liste(users)
+        lcomptes = fbd.account_list(users)
+        lmdp = fbd.password_list(users)
+        ltype = fbd.type_liste(users)
 
         pseudo = input("Veuillez entrer votre nom d'utilisateur : ")
         mdp = getpass.getpass("Veuillez entrer votre mot de passe : ")
@@ -324,7 +327,7 @@ class Geographe(Individu):
                 liste_info.append(age5_2)
 
             # Creation de l'entree
-            entree = pays_vide()
+            entree = fbd.pays_vide()
             entree['Government']['Country name']['conventional short form']['text'] = Nom
             print("Votre pays a bien ete cree")
             if len(liste_info) >0 : 
@@ -414,7 +417,7 @@ class Geographe(Individu):
                 
                 
                 print ("Le pays ",nom_pays, "va être modifié :")
-                nom_pays = get_code(nom_pays)
+                nom_pays = fbd.get_code(nom_pays)
                 # Test de présence du pays
                 if len(liste_info) >0 : 
                     if liste_info[0] not in ['None','none']: 
@@ -471,9 +474,9 @@ class DataScientist(Consultant):
         with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
-        lcomptes = account_list(users)
-        lmdp = password_list(users)
-        ltype = type_liste(users)
+        lcomptes = fbd.account_list(users)
+        lmdp = fbd.password_list(users)
+        ltype = fbd.type_liste(users)
 
         pseudo = input("Veuillez entrer votre nom d'utilisateur : ")
         mdp = getpass.getpass("Veuillez entrer votre mot de passe : ")
@@ -634,9 +637,9 @@ class Admin(Geographe, DataScientist):
     def connexion(self): 
         with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
-        lcomptes = account_list(users)
-        lmdp = password_list(users)
-        ltype = type_liste(users)
+        lcomptes = fbd.account_list(users)
+        lmdp = fbd.password_list(users)
+        ltype = fbd.type_liste(users)
 
         pseudo = input("Veuillez entrer votre nom d'utilisateur : ")
         mdp = getpass.getpass("Veuillez entrer votre mot de passe : ")
@@ -687,7 +690,7 @@ class Admin(Geographe, DataScientist):
         try : 
             nom_ou_code_pays = int(nom_ou_code_pays)
         except : 
-            nom_ou_code_pays = get_code(nom_ou_code_pays)
+            nom_ou_code_pays = fbd.get_code(nom_ou_code_pays)
 
         del data[nom_ou_code_pays]
         with open("DataTreatment/country.json", "w") as write_file:
@@ -729,7 +732,7 @@ class Admin(Geographe, DataScientist):
         with open("DataTreatment/DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
-        liste = account_list(users)
+        liste = fbd.account_list(users)
         print("Liste des comptes disponibles : ", liste)
         nom = input("Veuillez donner le nom du compte a supprimer : ")
         if nom in liste : 

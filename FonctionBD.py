@@ -1,20 +1,29 @@
+""" 
+Ce fichier regroupe toutes les fonctionnalités annexes utilisées dans l'application 
+afin de ne pas surcharger le module Acteur 
+
+""" 
+
+
 import matplotlib.pyplot as plt
 import json
 import numpy
 import os
-with open("DataTreatment/user.json") as json_file:
-    users = json.load(json_file)
 
-with open("DataTreatment/Suggestions.json") as json_file: 
-    sugges =json.load(json_file)
-    
 # Fonction permettant de vider la console 
+
 clear = lambda: os.system('cls') 
 
 #### FICHIER DE REGROUPEMENT DES FONCTIONS ANNEXES ####
 
-# Fonction de creation de pays vide 
-def pays_vide():   
+def pays_vide():  
+    """Genere un pays vide contenant uniquement les critères utilises dans l'application
+
+    Returns:
+        entree{list of dict} -- Pays vide 
+
+    """     
+
     entree = {}
     entree['Government'] = {}
     entree['Government']['Country name'] = {}
@@ -65,7 +74,7 @@ def is_number(s):
 
 # Fonction de récupération de code pays 
 def get_code(nom_pays): 
-    """Permet de récuperer le code d'un pays dans la base de donnée
+    """Permet de récuperer le code d'un pays dans la base de donnée utilisateur User.json
 
     Arguments:
         nom_pays {str} -- Nom du pays à récupérer
@@ -112,7 +121,7 @@ def get_code(nom_pays):
 # Fonction de création de listes 
 # liste des comptes 
 def account_list(users): 
-    """Permet de récupérer la liste des utilisateurs
+    """Permet de récupérer la liste des utilisateurs dans la base de donnée utilisateur User.json
 
     Arguments:
         users {list of dict} -- Base de données utilisateurs
@@ -123,7 +132,7 @@ def account_list(users):
     return(liste)
 
 def password_list(users): 
-    """Permet de récupérer la liste des mots de passes
+    """Permet de récupérer la liste des mots de passes dans la base de donnée utilisateur User.json
 
     Arguments:
         users {list of dict} -- Base de données utilisateurs
@@ -134,7 +143,7 @@ def password_list(users):
     return(liste)
 
 def type_liste(users): 
-    """Permet de récupérer la liste des types par utilisateurs
+    """Permet de récupérer la liste des types par utilisateurs dans la base de donnée utilisateur User.json
 
     Arguments:
         users {list of dict} -- Base de données utilisateurs
