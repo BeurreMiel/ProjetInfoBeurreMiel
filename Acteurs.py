@@ -21,8 +21,8 @@ class Individu:
             previous_menu {list} -- menu précédent l'appel de la fonction
 
         Returns:
-            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
-            [Ferme()] -- [Quitte l'application]
+            Ouvert(previous_menu) -- Renvoie le menu précédent
+            Ferme() -- Quitte l'application
         """        
         print("{:^63}\n".format("\nVoulez vous quitter cette application ? (Y/N)"))
         check = input("Choix : ")
@@ -256,7 +256,6 @@ class Geographe(Individu):
             # La fonction demande à l'utilisateur s'il souhaite ajouter des informations
             complementaire = input('Voulez vous ajouter des informations ? (Y/N)')
             liste_info = []
-            liste_année = []
             # Si l'utilisateur accepte 
             if complementaire in ["Y","y"]: 
                 superficie = input('Entrez la superficie du pays en km2 totale, tapez None pour passer la question :')

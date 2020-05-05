@@ -1,9 +1,12 @@
 from pyfiglet import Figlet
 from FonctionBD import clear
 
-class Ouvert: #Permet l'ouverture d'un menu
+class Ouvert: 
+    """Ensemble des méthodes permettant l'ouverture et l'affichage d'un menu 
+    """    
+
     def __init__(self,previous_menu): 
-        # previous_menu est un dictonnaire contenant les actions possibles du menu actuel
+        
         self.previous_menu = previous_menu 
 
     def run(self): 

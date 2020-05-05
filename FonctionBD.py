@@ -13,6 +13,8 @@ import os
 # Fonction permettant de vider la console 
 
 clear = lambda: os.system('cls') 
+"""Fonction permettant de supprimer la console afin d'avoir un menu propre
+"""
 
 #### FICHIER DE REGROUPEMENT DES FONCTIONS ANNEXES ####
 

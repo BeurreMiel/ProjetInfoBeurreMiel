@@ -1,3 +1,5 @@
+"""Déroulement des menus en partant du menu principal et fonctions annexes sur les menus 
+"""
 from Menus.menu_ouvert import Ouvert
 from Acteurs import Individu
 from Acteurs import Consultant
@@ -6,6 +8,11 @@ from Acteurs import DataScientist
 from Acteurs import Admin
 
 def connexion(previous_menu): 
+    """Menu intermédiaire de connection proposant à l'utilisateur de se connecter s'il ne l'est pas 
+
+    Arguments:
+        previous_menu {liste} -- Menu précédent de l'utilisateur spécifié 
+    """    
     menu_act = previous_menu
 
     if menu_act["individu"].connexion() : #Vérifie si l'acteur peut se connecter et est connecté  
@@ -16,6 +23,13 @@ def connexion(previous_menu):
     return(Ouvert(menu_act))
 
 def indices_actions(ind,indice_taches):
+    """Définit les actions possibles pour chaques classes dans le menu 
+    Différent des indices d'appel de critère utilisés dans certaines fonctions
+
+    Arguments:
+        ind {Individu.class} -- Individu spécifié ayant des actions propres
+        indice_taches {List} -- Liste des toutes les taches possibles
+    """    
     menu_act = {}
     menu_act["individu"] = ind
     menu_act["question"] = menu[1]["question"]
@@ -25,6 +39,11 @@ def indices_actions(ind,indice_taches):
     return(Ouvert(menu_act))
 
 def menu_graph(previous_menu): 
+    """Création du menu intermédaire pour la fonction représentation graphique 
+
+    Arguments:
+        previous_menu {List} -- Menu précédent correspondant à l'utilisateur 
+    """    
     menu_act = {}
     menu_act["individu"] = previous_menu["individu"]
     menu_act["question"] = "Selectionnez le critère"
@@ -56,6 +75,11 @@ def menu_graph(previous_menu):
     return(Ouvert(menu_act))
 
 def menu_resume(previous_menu): 
+    """Création du menu intermédaire pour la fonction résumé d'information
+
+    Arguments:
+        previous_menu {List} -- Menu précédent correspondant à l'utilisateur 
+    """ 
     menu_act = {}
     menu_act["individu"] = menu_act["individu"] = previous_menu["individu"]
     menu_act["question"] = "Selectionnez le critère"
@@ -87,6 +111,11 @@ def menu_resume(previous_menu):
     return(Ouvert(menu_act))
 
 def gestion_pays(previous_menu):
+    """Menu intermédiare permettant à l'utilisateur de choisir entre l'ajout et la suppréssion de pays 
+
+    Arguments:
+        previous_menu {List} -- Menu précédent correspondant à l'utilisateur 
+    """    
     menu_act = {}
     menu_act["individu"] = menu_act["individu"] = previous_menu["individu"]
     menu_act["question"] = "Que voulez vous faire ? "
@@ -103,7 +132,6 @@ def gestion_pays(previous_menu):
     return(Ouvert(menu_act))
 
 menu = [
-    # Menu de selection du type d'utilisateur 
     { 
         "question" : "Selectionnez votre type utilisateur",
         "options" : ["Consultant", "Géographe", "DataScientist", "Administrateur", "Quitter l'application"],
@@ -117,7 +145,6 @@ menu = [
         "path": []
     },
 
-    # Menu de selection de l'action
 
     {
         "question" : "Que voulez vous faire ? ",
@@ -144,3 +171,5 @@ menu = [
         "individu": Individu(),
         "path": []
     }]
+"""Menu principal et menu utilisateur proposant l'ensemble des actions possibles
+"""

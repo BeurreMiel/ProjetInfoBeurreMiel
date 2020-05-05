@@ -1,15 +1,19 @@
+"""Différentes fonctions des menus de l'application
+"""
 from pyfiglet import Figlet
 from Menus.menu_ouvert import Ouvert
 from FonctionBD import clear
 
 class Main_menu: 
+    """Ensemble des méthodes définissant le menu principal et les enchainements de menus
+    """    
     def __init__(self): 
         pass
     
     def Bienvenue(self):
         """ 
-            [Création du message de Bienvenue] 
-            Se déclanche au lancement de l'application 
+            Création du message de Bienvenue
+            Se lance au lancement de l'application 
         """        
         clear()
         welcome = Figlet(font='big')
@@ -23,7 +27,7 @@ class Main_menu:
         print("\n")
 
     def Au_revoir(self): 
-        """[Création du message de départ de l'application]
+        """Création du message de départ de l'application
         """       
         clear() 
         print("\n")
