@@ -1,12 +1,7 @@
 import json
 import numpy
 import matplotlib.pyplot as plt
-from FonctionBD import account_list
-from FonctionBD import password_list
-from FonctionBD import pays_vide
-from FonctionBD import type_liste
-from FonctionBD import get_code
-from FonctionBD import is_number
+from FonctionBD import *
 from Menus.menu_ouvert import Ouvert
 from Menus.menu_ferme import Ferme
 import getpass
@@ -50,7 +45,7 @@ class Individu:
         """    
         # Chargement de la base de données 
         nom_ou_code_pays = input("Entrez le nom ou le code du pays : ")
-        filename="country.json"
+        filename="DataTreatment/country.json"
         with open(filename) as json_file:
             data = json.load(json_file)
          
@@ -116,9 +111,9 @@ class Consultant(Individu):
         liste_info.append(pop)
         crois = input('Entrez la croissance demographique du pays en pourcentage , tapez None pour passer la question :')
         liste_info.append(crois)
-        inflation = input('Entrez l\'inflation du pays en pourcetage pour l\'année 2016, tapez None pour passer la question :')
+        inflation = input('Entrez l\'inflation du pays en pourcentage pour l\'année 2016, tapez None pour passer la question :')
         liste_info.append(inflation)
-        inflation2 = input('Entrez l\'inflation du pays en pourcetage pour l\'année 2015, tapez None pour passer la question :')
+        inflation2 = input('Entrez l\'inflation du pays en pourcentage pour l\'année 2015, tapez None pour passer la question :')
         liste_info.append(inflation2)
         dette = input('Entrez la dette en dollars - unité incluse (trillion, billion...) - pour l\'année 2016, tapez None pour passer la question :')
         liste_info.append(dette)
@@ -193,7 +188,7 @@ class Geographe(Individu):
         self.type = "Geographe"
     
     def connexion(self): 
-        with open("user.json") as json_file:
+        with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
         lcomptes = account_list(users)
@@ -236,7 +231,7 @@ class Geographe(Individu):
             input( "Appuyez sur Entrer pour continuer")
             return(Ouvert(previous))
 
-        filename="country.json"
+        filename="DataTreatment/country.json"
         with open(filename) as json_file:
             data = json.load(json_file)
 
@@ -258,6 +253,7 @@ class Geographe(Individu):
             # La fonction demande à l'utilisateur s'il souhaite ajouter des informations
             complementaire = input('Voulez vous ajouter des informations ? (Y/N)')
             liste_info = []
+            liste_année = []
             # Si l'utilisateur accepte 
             if complementaire in ["Y","y"]: 
                 superficie = input('Entrez la superficie du pays en km2 totale, tapez None pour passer la question :')
@@ -268,9 +264,9 @@ class Geographe(Individu):
                 liste_info.append(pop)
                 crois = input('Entrez la croissance demographique du pays en pourcentage , tapez None pour passer la question :')
                 liste_info.append(crois)
-                inflation = input('Entrez l\'inflation du pays en pourcetage pour l\'année 2016, tapez None pour passer la question :')
+                inflation = input('Entrez l\'inflation du pays en pourcentage pour l\'année 2016, tapez None pour passer la question :')
                 liste_info.append(inflation)
-                inflation2 = input('Entrez l\'inflation du pays en pourcetage pour l\'année 2015, tapez None pour passer la question :')
+                inflation2 = input('Entrez l\'inflation du pays en pourcentage pour l\'année 2015, tapez None pour passer la question :')
                 liste_info.append(inflation2)
                 dette = input('Entrez la dette en dollars - unité incluse (trillion, billion...) - pour l\'année 2016, tapez None pour passer la question :')
                 liste_info.append(dette)
@@ -361,13 +357,13 @@ class Geographe(Individu):
                 if liste_info[13] not in ['None','none']: 
                     entree['People and Society']['Age structure']['65 years and over']['text'] = str(liste_info[26])+"% (male "+str(liste_info[27])+"% / female "+str(liste_info[28])+")"
                 print('Vos informations complementaires ont bien ete enregistrees')
-            with open("country.json") as json_file: 
+            with open("DataTreatment/country.json") as json_file: 
                 data =json.load(json_file)
             if nouveau_pays : 
                 data.append(entree)
             else :
                 data[code]= entree 
-            with open("country.json", "w") as write_file:
+            with open("DataTreatment/country.json", "w") as write_file:
                 json.dump(data, write_file)
 
         print("Votre ajout a bien été enregistrée")
@@ -384,7 +380,7 @@ class Geographe(Individu):
             sugges =json.load(json_file)
 
         
-        with open("country.json") as json_file:
+        with open("DataTreatment/country.json") as json_file:
             data = json.load(json_file)
 
         n = len(sugges)
@@ -472,7 +468,7 @@ class DataScientist(Consultant):
         self.type = "DataScientist"
     
     def connexion(self): 
-        with open("user.json") as json_file:
+        with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
         lcomptes = account_list(users)
@@ -515,7 +511,7 @@ class DataScientist(Consultant):
             input( "Appuyez sur Entrer pour continuer")
             return(Ouvert(previous_menu))
         
-        filename="country.json"
+        filename="DataTreatment/country.json"
         with open(filename) as json_file:
             data = json.load(json_file)     
             
@@ -636,7 +632,7 @@ class Admin(Geographe, DataScientist):
         self.type = "Administrateur"
     
     def connexion(self): 
-        with open("user.json") as json_file:
+        with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
         lcomptes = account_list(users)
         lmdp = password_list(users)
@@ -682,7 +678,7 @@ class Admin(Geographe, DataScientist):
             input( "Appuyez sur Entrer pour continuer ")
             return(Ouvert(previous_menu))
 
-        filename="country.json"
+        filename="DataTreatment/country.json"
         with open(filename) as json_file:
             data = json.load(json_file)
 
@@ -694,7 +690,7 @@ class Admin(Geographe, DataScientist):
             nom_ou_code_pays = get_code(nom_ou_code_pays)
 
         del data[nom_ou_code_pays]
-        with open("country.json", "w") as write_file:
+        with open("DataTreatment/country.json", "w") as write_file:
             json.dump(data, write_file)
 
         print("Votre suppression a bien été enregistrée")
@@ -704,7 +700,7 @@ class Admin(Geographe, DataScientist):
 
 
     def ajout_compte(self): 
-        with open("user.json") as json_file:
+        with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
         new = {}
@@ -725,12 +721,12 @@ class Admin(Geographe, DataScientist):
     
         print("L'utilisateur",id_user,"vient d'etre cree et va etre ajouter a la base")
         users.append(new)
-        with open("user.json", "w") as write_file:
+        with open("DataTreatment/user.json", "w") as write_file:
             json.dump(users, write_file)
 
 
     def suppression_compte(self): 
-        with open("user.json") as json_file:
+        with open("DataTreatment/DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
         liste = account_list(users)
@@ -741,7 +737,7 @@ class Admin(Geographe, DataScientist):
             del users[numero]
         else : 
             print("Aucun changement effectué")
-        with open("user.json", "w") as write_file:
+        with open("DataTreatment/user.json", "w") as write_file:
             json.dump(users, write_file)
 
     def  gestion_comptes(self,previous_menu): 
