@@ -10,4 +10,7 @@ L'installation de ces modules se fait sous Windows via la commande python -m pip
 
 Pour lancer l'application, lancez le fichier main.py
 
+# Missing Fonctionalities 
+
+Il reste à rajouter la fonction résumé d'information qui reste à finaliser 
 
