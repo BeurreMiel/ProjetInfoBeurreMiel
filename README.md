@@ -2,6 +2,12 @@
 
 SOULI et totalement Mailine sont accro au café 
 
-# Last Updates : 
+# How to use : 
 
-SOULI DOIT VENIR JOUER À TESO
+Cette application nécessite les modules json, numpy, matplotlib getpass ainsi que pyfiglet
+
+L'installation de ces modules se fait sous Windows via la commande python -m pip install NomduModule
+
+Pour lancer l'application, lancez le fichier main.py
+
+
