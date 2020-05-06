@@ -8,6 +8,7 @@ import FonctionBD as fbd
 from Menus.menu_ouvert import Ouvert
 from Menus.menu_ferme import Ferme
 import getpass
+from Fonction_resume import resume_information
 
 class Individu:     
     def __init__(self):
@@ -547,14 +548,17 @@ class DataScientist(Consultant):
         
         return("On doit revenir au menu précédent")
 
+    def resume(self,critere,previous_menu): 
+        resume_information(critere,previous_menu)
+        
     def representationgraphique(self,previous_menu,critere):
         """ Fonction permettant de générer une représentation graphique du critère demandé et des boxplots des classes d'âges
 
         Arguments:
             previous_menu {list} -- menu précédent l'appel de la fonction
-            critere              -- critere entré par le DataScientist    
+            critere              -- critere entré par le DataScientist via le menu
         Returns:
-            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+            Ouvert(previous_menu) -- Renvoie le menu précédent
             
         """       
         if not self.connecte : 
@@ -730,7 +734,7 @@ class Admin(Geographe, DataScientist):
             previous_menu {list} -- menu précédent l'appel de la fonction
 
         Returns:
-            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+            Ouvert(previous_menu) -- [Renvoie le menu précédent]
             
         """       
         if not self.connecte : 
