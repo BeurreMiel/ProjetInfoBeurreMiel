@@ -61,9 +61,14 @@ class Individu:
         with open(filename) as json_file:
             data = json.load(json_file)
          
-        try : 
-            nom_ou_code_pays = int(nom_ou_code_pays)
-        except : nom_ou_code_pays = fbd.get_code(nom_ou_code_pays)
+        if fbd.is_number(nom_ou_code_pays):
+            int(nom_ou_code_pays)
+        else : 
+            try : 
+                nom_ou_code_pays = fbd.get_code(nom_ou_code_pays)
+            except : 
+                input("Pays introuvable, appuyez sur Entrer pour continuer ")
+                return(Ouvert(previous_menu))
 
         print("Code du pays sélectionné : ",nom_ou_code_pays,"\n")
         nom_ou_code_pays = int(nom_ou_code_pays)
@@ -278,7 +283,6 @@ class Geographe(Individu):
             # La fonction demande à l'utilisateur s'il souhaite ajouter des informations
             complementaire = input('Voulez vous ajouter des informations ? (Y/N)')
             liste_info = []
-            liste_année = []
             # Si l'utilisateur accepte 
             if complementaire in ["Y","y"]: 
                 superficie = input('Entrez la superficie du pays en km2 totale, tapez None pour passer la question :')
@@ -574,7 +578,7 @@ class DataScientist(Consultant):
 
         
         #Erreurs
-        if critere<2 or critere>10 :
+        if critere<1 or critere>9 :
             print('Critère inexistant')
             return(Ouvert(previous_menu))
 
