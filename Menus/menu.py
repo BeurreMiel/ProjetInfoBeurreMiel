@@ -59,15 +59,15 @@ def menu_graph(previous_menu):
         "Retour au menu précédent", 
         "Quitter l'application"]
     menu_act["actions"] = [
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,1)),
             (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,2)),
-            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,3)),
-            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,4)), # 
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,3)), # 
+            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,4)),
             (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,5)),
             (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,6)),
             (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,7)),
             (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,8)),
             (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,9)),
-            (lambda previous_menu :previous_menu["individu"].representationgraphique(previous_menu,10)),
             (lambda previous_menu : Ouvert(menu[0])),
             Individu().quitter]
     menu_act["path"] = []
