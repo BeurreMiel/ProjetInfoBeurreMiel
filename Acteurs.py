@@ -578,14 +578,6 @@ class DataScientist(Consultant):
         crit=[]
         pays=[]    
 
-            
-
-        
-        #Erreurs
-        if critere<1 or critere>9 :
-            print('Critère inexistant')
-            return(Ouvert(previous_menu))
-
 
         #Séparation des tranches d'âges
         for j in range (len(data)):
@@ -622,59 +614,155 @@ class DataScientist(Consultant):
         #Pour réaliser le diagramme en barres d’un certain critère  
         
             if critere==1:
-                    for i in range (len(data)):
-                        crit.append(data[i]['Geography']['Area']['total']['text'])
-                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
-            elif critere==2:
-                    for i in range (len(data)):
-                        crit.append(data[i]['People and Society']['Population']['text'])
-                        pays.append(data[i]['Government']['Country name']['conventional short form']['text'])        
-                
-            elif critere==3:
-               for i in range (len(data)):
-                   crit.append(data[i]['People and Society']['Population growth rate']['text'])
-                   pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
-            elif critere==4:
+               
                 for i in range (len(data)):
-                    crit.append(data[i]['Economy']['Inflation rate (consumer prices)']['text'])
+                    superficie = data[i]['Geography']['Area']['total']['text']
+                    superficie = superficie[:superficie.find(' s')]
+                    superficie = superficie.replace( ',' , '' )
+                    crit.append(float(superficie))
                     pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+                
+                #Diagramme en barre du critère
+                plt.bar(pays,crit)
+                plt.title("Diagramme en barre du critère") 
+                plt.show()
+                
+                #Boxplot des tranches d'âges
+                plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.show()
+            elif critere==2:
+              
+                for i in range (len(data)):
+                    pop = data[i]['People and Society']['Population']['text']
+                    pop = pop[:pop.find(' (')]
+                    pop = pop[:pop.find(' m')]
+                    pop = pop.replace( ',' , '' )
+                    crit.append(float(pop))
+                    pays.append(data[i]['Government']['Country name']['conventional short form']['text'])        
+                
+                #Diagramme en barre du critère
+                plt.bar(pays,crit)
+                plt.title("Diagramme en barre du critère") 
+                plt.show()
             
+                #Boxplot des tranches d'âges
+                plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.show()
+            elif critere==3:
+                for i in range (len(data)):
+                   pourcent = data[i]['People and Society']['Population growth rate']['text']
+                   pourcent = pourcent[:pourcent.find('%')]
+                   
+                   crit.append(float(pourcent))
+                   pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+                
+                #Diagramme en barre du critère
+                plt.bar(pays,crit)
+                plt.title("Diagramme en barre du critère") 
+                plt.show()
+                
+                #Boxplot des tranches d'âges
+                plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.show()
+            elif critere==4:
+                inf1=[]
+                inf2=[]
+                for i in range (len(data)):
+                    pourcent = data[i]['Economy']['Inflation rate (consumer prices)']['text']
+                    inf2016 = pourcent[:pourcent.find('%')]
+                    inf2015 = pourcent[pourcent.find('++ ')+len('++ '):pourcent.find('% (2015 est.)')]
+                    inf1.append(float(inf2016))
+                    inf2.append(float(inf2015))
+                    pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+               
+                #Diagramme en barre du critère
+                plt.bar(pays,inf1)
+                plt.title("Diagramme en barre du critère pour 2016") 
+                plt.show()
+                plt.bar(pays,inf2)
+                plt.title("Diagramme en barre du critère pour 2015") 
+                plt.show()
+                #Boxplot des tranches d'âges
+                plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.show()
+                
             elif critere==5:
                 for i in range (len(data)):
                     crit.append(data[i]['Economy']['Debt - external']['text'])
                     pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
+                
+                #Diagramme en barre du critère
+                plt.bar(pays,crit)
+                plt.title("Diagramme en barre du critère") 
+                plt.show()
+                
+                #Boxplot des tranches d'âges
+                plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.show()
             elif critere==6:
                 for i in range (len(data)):
                     crit.append(data[i]['Economy']['Unemployment rate']['text'])
                     pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
+                
+                #Diagramme en barre du critère
+                plt.bar(pays,crit)
+                plt.title("Diagramme en barre du critère") 
+                plt.show()
+                
+                #Boxplot des tranches d'âges
+                plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.show()
             elif critere==7:
                 for i in range (len(data)):
-                    crit.append(data[i]['People and Society']['Health expenditures']['text'])
+                    pourcent = data[i]['People and Society']['Health expenditures']['text']
+                    pourcent = pourcent[:pourcent.find('%')]
+                    crit.append(float(pourcent))
                     pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
+                    
+                #Diagramme en barre du critère
+                plt.bar(pays,crit)
+                plt.title("Diagramme en barre du critère") 
+                plt.show()
+                
+                #Boxplot des tranches d'âges
+                plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.show()
             elif critere==8:
-               for i in range (len(data)):
-                   crit.append(data[i]['People and Society']['Education expenditures']['text'])
-                   pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
-            
+                for i in range (len(data)):
+                    crit.append(data[i]['People and Society']['Education expenditures']['text'])
+                    pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
+              
+                #Diagramme en barre du critère
+                plt.bar(pays,crit)
+                plt.title("Diagramme en barre du critère") 
+                plt.show()
+                
+                #Boxplot des tranches d'âges
+                plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.show()
             elif critere==9:
-               for i in range (len(data)):
+                for i in range (len(data)):
                    crit.append(data[i]['Military and Security']['Military expenditures']['text']) 
                    pays.append(data[i]['Government']['Country name']['conventional short form']['text'])
             
-            #Diagramme en barre du critère
-            plt.bar(pays,crit)
-            plt.title("Diagramme en barre du critère") 
-            plt.show()
+                #Diagramme en barre du critère
+                plt.bar(pays,crit)
+                plt.title("Diagramme en barre du critère") 
+                plt.show()
+                
+                #Boxplot des tranches d'âges
+                plt.boxplot([TR1,TR2,TR3,TR4,TR5])
+                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.show()
             
-            #Boxplot des tranches d'âges
-            plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-            plt.title("Boxplot par tranche d'âge du critère") 
-            plt.show()
             
             input("Appuyez sur Entrer pour continuer")
             return(Ouvert(previous_menu))
