@@ -21,8 +21,8 @@ class Individu:
             previous_menu {list} -- menu précédent l'appel de la fonction
 
         Returns:
-            Ouvert(previous_menu) -- Renvoie le menu précédent
-            Ferme() -- Quitte l'application
+            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+            [Ferme()] -- [Quitte l'application]
         """        
         print("{:^63}\n".format("\nVoulez vous quitter cette application ? (Y/N)"))
         check = input("Choix : ")
@@ -31,13 +31,22 @@ class Individu:
         else : 
             return Ouvert(previous_menu)
     def suppression(self,previous_menu): #Pour éviter les erreurs
+        """ Fonction permettant de restreindre l'accès 
+
+        Arguments:
+            previous_menu {list} -- menu précédent l'appel de la fonction
+        
+        Returns:
+            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+            
+        """       
         if not self.type == "Administrateur": 
             print ("Vous n'êtes pas Administrateur \n Accès refusé")
             input( "Appuyez sur Entrer pour continuer ")
             return(Ouvert(previous_menu))
 
     def affichage(self,previous_menu):
-        """ Affichage d'un pays 
+        """ Fonction permettant d'afficher les données associées à un pays 
 
         Arguments:
             previous_menu {list} -- Menu précédent l'appel de la fonction
@@ -94,7 +103,7 @@ class Consultant(Individu):
         self.type="Consultant"
         
     def ajout_suggestion(self,previous_menu): 
-        """ Ajout de suggestions
+        """ Fonction permettant de proposer des suggestions
 
         Arguments:
             previous_menu {list} -- Menu précédent l'appel de la fonction
@@ -191,6 +200,8 @@ class Geographe(Individu):
         self.type = "Geographe"
     
     def connexion(self): 
+        """ Fonction permettant de se connecter en tant que Géographe
+        """       
         with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
@@ -215,6 +226,8 @@ class Geographe(Individu):
         return self.connecte
     
     def deconnexion(self): 
+        """ Fonction permettant de se deconnecter
+        """       
         if not self.connecte: 
             print("Vous n'êtes pas connecté : ")
             return("On doit revenir au menu précédent")
@@ -229,6 +242,15 @@ class Geographe(Individu):
         return("On doit revenir au menu précédent")
 
     def ajout_pays(self,previous): 
+        """ Fonction permettant d'ajouter un pays à la base de données'
+
+        Arguments:
+            previous_menu {list} -- menu précédent l'appel de la fonction
+
+        Returns:
+            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+        
+        """       
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
             input( "Appuyez sur Entrer pour continuer")
@@ -256,6 +278,7 @@ class Geographe(Individu):
             # La fonction demande à l'utilisateur s'il souhaite ajouter des informations
             complementaire = input('Voulez vous ajouter des informations ? (Y/N)')
             liste_info = []
+            liste_année = []
             # Si l'utilisateur accepte 
             if complementaire in ["Y","y"]: 
                 superficie = input('Entrez la superficie du pays en km2 totale, tapez None pour passer la question :')
@@ -373,6 +396,15 @@ class Geographe(Individu):
         return(Ouvert(previous))
 
     def gestion_suggestion(self,previous):
+        """ Fonction permettant de gérer les suggestions
+
+        Arguments:
+            previous_menu {list} -- menu précédent l'appel de la fonction
+
+        Returns:
+            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+          
+        """       
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
             input( "Appuyez sur Entrer pour continuer")
@@ -470,6 +502,8 @@ class DataScientist(Consultant):
         self.type = "DataScientist"
     
     def connexion(self): 
+        """ Fonction permettant de se connecter en tant que DataScientist
+        """       
         with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
@@ -494,6 +528,8 @@ class DataScientist(Consultant):
         return self.connecte
     
     def deconnexion(self): 
+        """ Fonction permettant de se deconnecter
+        """       
         if not self.connecte: 
             print("Vous n'êtes pas connecté : ")
             return("On doit revenir au menu précédent")
@@ -508,6 +544,15 @@ class DataScientist(Consultant):
         return("On doit revenir au menu précédent")
 
     def representationgraphique(self,previous_menu,critere):
+        """ Fonction permettant de générer une représentation graphique du critère demandé et des boxplots des classes d'âges
+
+        Arguments:
+            previous_menu {list} -- menu précédent l'appel de la fonction
+            critere              -- critere entré par le DataScientist    
+        Returns:
+            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+            
+        """       
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
             input( "Appuyez sur Entrer pour continuer")
@@ -634,6 +679,8 @@ class Admin(Geographe, DataScientist):
         self.type = "Administrateur"
     
     def connexion(self): 
+        """ Fonction permettant de se connecter en tant qu'Administrateur
+        """       
         with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
         lcomptes = fbd.account_list(users)
@@ -657,6 +704,8 @@ class Admin(Geographe, DataScientist):
         return self.connecte
     
     def deconnexion(self): 
+        """ Fonction permettant de se deconnecter
+        """       
         if not self.connecte: 
             print("Vous n'êtes pas connecté : ")
             return("On doit revenir au menu précédent")
@@ -671,6 +720,15 @@ class Admin(Geographe, DataScientist):
         return("On doit revenir au menu précédent")
         
     def suppression(self,previous_menu):
+        """ Fonction permettant de supprimer un pays (et ses informations) de la base de données
+
+        Arguments:
+            previous_menu {list} -- menu précédent l'appel de la fonction
+
+        Returns:
+            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
+            
+        """       
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
             input( "Appuyez sur Entrer pour continuer ")
@@ -702,6 +760,9 @@ class Admin(Geographe, DataScientist):
 
 
     def ajout_compte(self): 
+        """ Fonction permettant d'ajouter un utilisateur (Géographe/DataScientist) à la base de données'
+
+        """       
         with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
@@ -728,6 +789,8 @@ class Admin(Geographe, DataScientist):
 
 
     def suppression_compte(self): 
+        """ Fonction permettant de supprimer un utilisateur (Géographe/DataScientist) de la base de données
+        """       
         with open("DataTreatment/DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
@@ -743,6 +806,7 @@ class Admin(Geographe, DataScientist):
             json.dump(users, write_file)
 
     def  gestion_comptes(self,previous_menu): 
+          
         if not self.connecte : 
             print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
             input("\n""Appuyez sur Entrer pour continuer ")
