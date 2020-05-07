@@ -5,7 +5,7 @@ import json
 import numpy
 import matplotlib.pyplot as plt
 import FonctionBD as fbd
-from Menus.menu import Ouvert
+from Menus.menu_ouvert import Ouvert
 from Menus.menu_ferme import Ferme
 import getpass
 from Fonction_resume import resume_information
@@ -552,7 +552,7 @@ class DataScientist(Consultant):
         try :
             resume_information(critere)
         except : 
-            input("Une erreur dans les argument s'est produite \n Appuyz sur Entrer pour continuer ")
+            input("Une erreur dans d'argument s'est produite \n Appuyz sur Entrer pour continuer ")
         return(Ouvert(previous_menu))
         
     def representationgraphique(self,previous_menu,critere):
@@ -859,10 +859,15 @@ class Admin(Geographe, DataScientist):
 
 
 
-    def ajout_compte(self): 
+    def ajout_compte(self,previous_menu): 
         """ Fonction permettant d'ajouter un utilisateur (Géographe/DataScientist) à la base de données'
 
         """       
+        if not self.connecte : 
+            print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
+            input("\n""Appuyez sur Entrer pour continuer ")
+            return(Ouvert(previous_menu))
+
         with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
@@ -887,11 +892,18 @@ class Admin(Geographe, DataScientist):
         with open("DataTreatment/user.json", "w") as write_file:
             json.dump(users, write_file)
 
+        return(Ouvert(previous_menu))
+        
 
-    def suppression_compte(self): 
+    def suppression_compte(self,previous_menu): 
         """ Fonction permettant de supprimer un utilisateur (Géographe/DataScientist) de la base de données
         """       
-        with open("DataTreatment/DataTreatment/user.json") as json_file:
+        if not self.connecte : 
+            print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
+            input("\n""Appuyez sur Entrer pour continuer ")
+            return(Ouvert(previous_menu))
+
+        with open("DataTreatment/user.json") as json_file:
             users = json.load(json_file)
 
         liste = fbd.account_list(users)
@@ -905,21 +917,4 @@ class Admin(Geographe, DataScientist):
         with open("DataTreatment/user.json", "w") as write_file:
             json.dump(users, write_file)
 
-    def  gestion_comptes(self,previous_menu): 
-          
-        if not self.connecte : 
-            print ("Vous n'êtes pas connecté \n Veuillez vous connecter")
-            input("\n""Appuyez sur Entrer pour continuer ")
-            return(Ouvert(previous_menu))
-        print("#### Gestion des comptes ####")
-        choix = input("Voulez vous ajouter ou supprimer un compte ? : (A/S) ")
-        if choix in ["a", "A"]: 
-            self.ajout_compte()
-            return(Ouvert(previous_menu)) # à finir
-        elif  choix in ["s", "S"]: 
-            self.suppression_compte()
-            return(Ouvert(previous_menu)) # à finir
-        else :
-            print("Aucun changement effectué")
-            input("Appuyez sur Entrer pour continuer ")
-            return(Ouvert(previous_menu))
+        return(Ouvert(previous_menu))
