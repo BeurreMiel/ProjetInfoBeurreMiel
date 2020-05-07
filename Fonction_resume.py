@@ -5,7 +5,7 @@ from Menus.menu_ouvert import Ouvert
 
 # Fonction resume
 
-def resume_information(critere,previous_menu):
+def resume_information(critere):
     nb_pays_max = input("Entrez le nombre de pays max : ")
     nb_pays_max = int(nb_pays_max)
     with open("DataTreatment/country.json") as json_file:
@@ -530,12 +530,11 @@ def resume_information(critere,previous_menu):
     for code_pays in liste_code_pays :
         liste_nom_pays += [data[code_pays]['Government']['Country name']['conventional short form']['text']]
 
+    print("\nRésultats : \n")
     for code in range(len(liste_code_pays)) :
-        print([liste_nom_pays[code], information_pays(liste_code_pays[code])])
+        print("• {} - {}".format(liste_nom_pays[code],information_pays(liste_code_pays[code])))
 
-    print("\nLa liste des pays ayant le critère le plus élevé est: ", liste_nom_pays)
-    input("Affichage terminé, appuyez sur Entrer pour continuer ")
-    return(Ouvert(previous_menu))
+    input("\nAffichage terminé, appuyez sur Entrer pour continuer ")
 
     #------------------------------------------------------------------------------
 

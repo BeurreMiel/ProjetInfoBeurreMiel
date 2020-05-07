@@ -5,7 +5,7 @@ import json
 import numpy
 import matplotlib.pyplot as plt
 import FonctionBD as fbd
-from Menus.menu_ouvert import Ouvert
+from Menus.menu import Ouvert
 from Menus.menu_ferme import Ferme
 import getpass
 from Fonction_resume import resume_information
@@ -549,7 +549,11 @@ class DataScientist(Consultant):
         return("On doit revenir au menu précédent")
 
     def resume(self,critere,previous_menu): 
-        resume_information(critere,previous_menu)
+        try :
+            resume_information(critere)
+        except : 
+            input("Une erreur dans les argument s'est produite \n Appuyz sur Entrer pour continuer ")
+        return(Ouvert(previous_menu))
         
     def representationgraphique(self,previous_menu,critere):
         """ Fonction permettant de générer une représentation graphique du critère demandé et des boxplots des classes d'âges
@@ -665,7 +669,7 @@ class DataScientist(Consultant):
                 
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge du critère") 
+                plt.title("Répartition de la population par tranche d'âge") 
                 plt.show()
             elif critere==4:
                 inf1=[]
