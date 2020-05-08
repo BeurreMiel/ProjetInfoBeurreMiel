@@ -1,8 +1,7 @@
 """Importation et traitement des données du fichier json 
 """### Importation des donnees ### 
 import json
-filename="Country - Backup - FirstVer.json"
-with open(filename) as json_file:
+with open("Country - Backup - FirstVer.json") as json_file:
     data = json.load(json_file)
 from FonctionBD import pays_vide
 

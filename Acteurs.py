@@ -22,8 +22,8 @@ class Individu:
             previous_menu {list} -- menu précédent l'appel de la fonction
 
         Returns:
-            [Ouvert(previous_menu)] -- [Renvoie le menu précédent]
-            [Ferme()] -- [Quitte l'application]
+            Ouvert(previous_menu) -- Renvoie le menu précéden
+            Ferme() -- Quitte l'application
         """        
         print("{:^63}\n".format("\nVoulez vous quitter cette application ? (Y/N)"))
         check = input("Choix : ")
@@ -100,8 +100,10 @@ class Individu:
                             ['Classe des 25-54 ans', inf11['25-54 years']['text']],
                             ['Classe des 55-64 ans', inf11['55-64 years']['text']],
                             ['Classe des 65 ans et plus', inf11['65 years and over']['text']]])
-        print(res)
-        input("Affichage terminé, appuyez sur Entrer pour continuer. ")
+
+        for i in range(len(res)) :
+            print("• {} : {}".format(res[i][0],res[i][1]))
+        input("\nAffichage terminé, appuyez sur Entrer pour continuer. ")
         return(Ouvert(previous_menu))
 # Classe consultant 
 class Consultant(Individu):
