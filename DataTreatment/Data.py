@@ -1,4 +1,5 @@
-### Importation des donnees ### 
+"""Importation et traitement des données du fichier json 
+"""### Importation des donnees ### 
 import json
 filename="Country - Backup - FirstVer.json"
 with open(filename) as json_file:
@@ -9,6 +10,15 @@ from FonctionBD import pays_vide
 ### Tentative de suppression des valeurs manquantes ####
 
 def clean_table(data):
+    """Fonction permettant de réduire la taille de la base en retirant les pays qui ne possèdent pas l'intégralité des critères
+    Ne garde également que les critères utilisés 
+
+    Arguments:
+        data {list of dict} -- Tableau de donnée original fourni
+    
+    Returns : 
+        data_clean {list of dict} -- Base de donnée nettoyée 
+    """    
     n=len( data)
     Table=[]
     for i in range(n):
