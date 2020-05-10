@@ -623,11 +623,12 @@ class DataScientist(Consultant):
                 plt.bar(pays,crit)
                 plt.xticks(rotation=90)
                 plt.title("Diagramme en barre de la superficie") 
+                plt.ylabel('en km^2')
                 plt.show()
                 
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge") 
+                plt.title("Boxplot par tranche d'âge en pourcent")
                 plt.show()
             elif critere==2:
               
@@ -643,11 +644,12 @@ class DataScientist(Consultant):
                 plt.bar(pays,crit)
                 plt.xticks(rotation=90)
                 plt.title("Diagramme en barre de la population") 
+                plt.ylabel('nombre d\'habitants')
                 plt.show()
             
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge") 
+                plt.title("Boxplot par tranche d'âge en pourcent") 
                 plt.show()
             elif critere==3:
                
@@ -660,12 +662,13 @@ class DataScientist(Consultant):
                 #Diagramme en barre du critère
                 plt.bar(pays,crit)
                 plt.xticks(rotation=90)
-                plt.title("Diagramme en barre de la croissance démographique") 
+                plt.title("Diagramme en barre de la croissance démographique")
+                plt.ylabel('en pourcent')
                 plt.show()
                 
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge") 
+                plt.title("Boxplot par tranche d'âge en pourcent")
                 plt.show()
             elif critere==4:
                 inf1=[]               
@@ -679,11 +682,12 @@ class DataScientist(Consultant):
                 plt.bar(pays,inf1)
                 plt.xticks(rotation=90)
                 plt.title("Diagramme en barre de l'inflation") 
+                plt.ylabel('en pourcent')
                 plt.show()
                
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge") 
+                plt.title("Boxplot par tranche d'âge en pourcent") 
                 plt.show()
                 
             elif critere==5:
@@ -704,11 +708,12 @@ class DataScientist(Consultant):
                 plt.bar(pays,crit)
                 plt.xticks(rotation=90)
                 plt.title("Diagramme en barre de la dette en million") 
+                plt.ylabel('en dollar')
                 plt.show()
                
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge") 
+                plt.title("Boxplot par tranche d'âge en pourcent") 
                 plt.show()
             elif critere==6:
                 for i in range (len(data)):
@@ -723,11 +728,12 @@ class DataScientist(Consultant):
                 plt.bar(pays,crit)
                 plt.xticks(rotation=90)
                 plt.title("Diagramme en barre du taux de chômage") 
+                plt.ylabel('en pourcent')
                 plt.show()
                
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge") 
+                plt.title("Boxplot par tranche d'âge en pourcent") 
                 plt.show()
             elif critere==7:               
                 for i in range (len(data)):
@@ -740,11 +746,12 @@ class DataScientist(Consultant):
                 plt.bar(pays,crit)
                 plt.xticks(rotation=90)
                 plt.title("Diagramme en barre du taux de dépenses en santé") 
+                plt.ylabel('en pourcent')
                 plt.show()
                
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge") 
+                plt.title("Boxplot par tranche d'âge en pourcent") 
                 plt.show()
             elif critere==8:
                 
@@ -759,13 +766,14 @@ class DataScientist(Consultant):
                 plt.bar(pays,crit)
                 plt.xticks(rotation=90)
                 plt.title("Diagramme en barre du taux de dépenses en éducation") 
+                plt.ylabel('en pourcent')
                 plt.show()
                 
                 #Il n'y a qu'un seul pays pour l'année la plus récente (2016) nous prenons alors l'année 2015
                 
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge") 
+                plt.title("Boxplot par tranche d'âge en pourcent") 
                 plt.show()
             elif critere==9:
                 for i in range (len(data)):
@@ -780,11 +788,12 @@ class DataScientist(Consultant):
                 plt.bar(pays,crit)
                 plt.xticks(rotation=90)
                 plt.title("Diagramme en barre du taux de dépenses militaires") 
+                plt.ylabel('en pourcent')
                 plt.show()
                 
                 #Boxplot des tranches d'âges
                 plt.boxplot([TR1,TR2,TR3,TR4,TR5])
-                plt.title("Boxplot par tranche d'âge") 
+                plt.title("Boxplot par tranche d'âge en pourcent") 
                 plt.show()
             
             
